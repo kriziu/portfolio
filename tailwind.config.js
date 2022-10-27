@@ -4,6 +4,12 @@ module.exports = {
     './common/**/*.{js,ts,jsx,tsx}',
     './modules/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: {},
+  theme: {
+    extend: {
+      fontSize: {
+        extra: '6rem',
+      },
+    },
+  },
   plugins: [],
 };

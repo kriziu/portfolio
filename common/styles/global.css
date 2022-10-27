@@ -5,7 +5,12 @@
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
+
+  overflow-x: hidden;
+
+  @apply bg-black text-white;
 }
+
 html {
   height: -webkit-fill-available;
 }

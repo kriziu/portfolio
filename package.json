@@ -2,18 +2,14 @@
   "name": "tailwind-template",
   "private": true,
   "scripts": {
-    "dev": "nodemon server/index.ts",
-    "dev:next": "next dev",
-    "dev:client": "ts-node server/index.ts",
-    "build:server": "tsc --project tsconfig.server.json",
-    "build:next": "next build",
-    "build": "npm-run-all build:*",
-    "start": "NODE_ENV=production node build/index.js",
-    "start:next": "next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@next/font": "^13.0.0",
+    "framer-motion": "^7.6.2",
     "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
