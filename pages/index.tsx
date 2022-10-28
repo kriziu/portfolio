@@ -17,7 +17,7 @@ export default function HomePage() {
           <ProjectsHeader />
         </ParallaxLayer>
 
-        <ParallaxLayer sticky={{ start: 1.35, end: 3.35 }}>
+        <ParallaxLayer sticky={{ start: 1.15, end: 3.15 }}>
           <ProjectList />
         </ParallaxLayer>
       </Parallax>
