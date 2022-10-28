@@ -31,6 +31,18 @@ const CircleMouse = () => {
 
       x: mousePosition.x - 75,
       y: mousePosition.y - 75,
+
+      mixBlendMode: 'difference',
+    },
+    [MouseVariant.BUTTON]: {
+      height: 100,
+      width: 100,
+
+      x: mousePosition.x - 50,
+      y: mousePosition.y - 50,
+
+      mixBlendMode: 'difference',
+      backgroundColor: 'white',
     },
   };
 
@@ -38,9 +50,11 @@ const CircleMouse = () => {
     <motion.div
       variants={variants}
       animate={mouseVariant}
-      className="pointer-events-none fixed top-0 left-0 z-50 h-8 w-8 rounded-full bg-violet-600 mix-blend-difference"
+      className="pointer-events-none fixed top-0 left-0 z-50 flex h-8 w-8 items-center justify-center rounded-full bg-violet-600 text-center text-black"
       transition={{ type: 'spring', stiffness: 2000, damping: 100 }}
-    />
+    >
+      {mouseVariant === MouseVariant.BUTTON && 'Click'}
+    </motion.div>
   );
 };
 

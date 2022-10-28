@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react';
 
-import { useScroll } from 'framer-motion';
-
 export const useScrollY = () => {
   const [scrolled, setScrolled] = useState(0);
 
-  const { scrollY } = useScroll();
-
   useEffect(() => {
-    const unsubscribe = scrollY.onChange(setScrolled);
+    const target = document.getElementById('__parallax');
 
-    return unsubscribe;
-  }, [scrollY]);
+    const handleScroll = () => {
+      if (target) setScrolled(target.scrollTop);
+    };
+
+    target?.addEventListener('scroll', handleScroll);
+
+    return () => {
+      target?.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return scrolled;
 };

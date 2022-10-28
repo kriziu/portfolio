@@ -9,11 +9,11 @@
   },
   "dependencies": {
     "@next/font": "^13.0.0",
+    "@react-spring/parallax": "^9.5.5",
     "framer-motion": "^7.6.2",
     "next": "13.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-use": "17.4.0"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.11.5",

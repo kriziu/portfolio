@@ -11,10 +11,10 @@ const MouseContextProvider = ({ children }: { children: ReactNode }) => {
   const [variant, setVariant] = useState(MouseVariant.DEFAULT);
 
   useEffect(() => {
-    if (variant === MouseVariant.TEXT) {
-      document.body.style.cursor = 'none';
-    } else {
+    if (variant === MouseVariant.DEFAULT) {
       document.body.style.cursor = 'default';
+    } else {
+      document.body.style.cursor = 'none';
     }
   }, [variant]);
 

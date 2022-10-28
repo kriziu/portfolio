@@ -4,7 +4,7 @@ const Header = () => {
   const { setMouseVariant } = useMouseVariant();
 
   return (
-    <div className="z-10 flex h-full w-full items-center justify-center overflow-hidden p-7">
+    <div className="flex h-full w-full items-center justify-center overflow-hidden p-7">
       <div>
         <p className="mb-5 text-lg text-zinc-500 sm:text-xl">
           Bruno Dzięcielski - Full-stack developer

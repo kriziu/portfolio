@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
 
-import { useScrollY } from '../hooks/useScrollY';
+import { useScrollY } from '@/common/hooks/useScrollY';
 
-const SubHeader = () => {
+const ProjectsHeader = () => {
   const scrolled = useScrollY();
 
   return (
-    <div className="z-50 flex h-screen w-full flex-col items-center overflow-hidden pt-12">
-      <motion.p
-        className=" whitespace-nowrap text-center text-6xl uppercase"
+    <div className="flex h-full w-full justify-center overflow-hidden">
+      <motion.h2
+        className="mt-2 whitespace-nowrap text-center text-6xl uppercase"
         style={{
           fontSize: `calc(max(10vw, 14vh) - ${scrolled / 10}px)`,
         }}
@@ -17,9 +17,9 @@ const SubHeader = () => {
         <span className="text-violet-600">dolor</span>{' '}
         <br className="hidden sm:block" />
         sit amet.
-      </motion.p>
+      </motion.h2>
     </div>
   );
 };
 
-export default SubHeader;
+export default ProjectsHeader;
