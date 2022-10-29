@@ -23,3 +23,9 @@ html {
   left: 0;
   right: 0;
 }
+
+@layer components {
+  .header {
+    @apply text-5xl sm:text-extra;
+  }
+}

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 import { useScrollY } from '@/common/hooks/useScrollY';
-import { MouseVariant, useMouseVariant } from '@/modules/customMouse';
+import { useMouseVariant } from '@/modules/customMouse';
 
 const ProjectsHeader = () => {
   const { setMouseVariant } = useMouseVariant();
@@ -14,10 +14,10 @@ const ProjectsHeader = () => {
         style={{
           fontSize: `calc(max(10vw, 14vh) - ${scrolled / 10}px)`,
         }}
-        onMouseEnter={() => setMouseVariant(MouseVariant.TEXT)}
-        onMouseLeave={() => setMouseVariant(MouseVariant.DEFAULT)}
+        onMouseEnter={setMouseVariant.text}
+        onMouseLeave={setMouseVariant.default}
       >
-        Projects I am <span className="text-violet-600">proud</span> of.
+        Projects I am <span className="text-violet-600">proud</span> of:
       </motion.h2>
     </div>
   );

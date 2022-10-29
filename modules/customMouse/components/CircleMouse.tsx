@@ -42,7 +42,7 @@ const CircleMouse = () => {
       y: mousePosition.y - 50,
 
       mixBlendMode: 'difference',
-      backgroundColor: 'white',
+      backgroundColor: 'rgba(255, 255, 255, 1)',
     },
   };
 

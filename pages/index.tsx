@@ -3,6 +3,7 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import CustomMouse from '@/modules/customMouse';
 import Header from '@/modules/header';
 import { ProjectList, ProjectsHeader } from '@/modules/projects';
+import Skills from '@/modules/skills';
 
 export default function HomePage() {
   return (
@@ -17,8 +18,12 @@ export default function HomePage() {
           <ProjectsHeader />
         </ParallaxLayer>
 
-        <ParallaxLayer sticky={{ start: 1.15, end: 3.15 }}>
+        <ParallaxLayer sticky={{ start: 1.15, end: 3.78 }}>
           <ProjectList />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={5}>
+          <Skills />
         </ParallaxLayer>
       </Parallax>
     </>

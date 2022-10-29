@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 import { useScrollY } from '@/common/hooks/useScrollY';
-import { MouseVariant, useMouseVariant } from '@/modules/customMouse';
+import { useMouseVariant } from '@/modules/customMouse';
+import shoesImage from '@/public/images/shoesecommerce.png';
 
-const scrollSpeed = 2;
+const scrollSpeed = 2.5;
 
 const ProjectList = () => {
   const { setMouseVariant } = useMouseVariant();
@@ -21,22 +23,42 @@ const ProjectList = () => {
   return (
     <>
       <motion.div
-        style={{ width: '400vh', x: -goodScroll }}
+        style={{ width: '650vh', x: -goodScroll }}
         className="relative z-50 flex h-full items-center justify-between bg-black pl-20"
       >
-        <div className="h-2/3 w-[40rem] rounded-lg bg-zinc-800" />
+        <Image
+          src={shoesImage}
+          alt="Shoes ecommerce project"
+          height={(window.innerHeight / 5) * 4}
+          className="rounded-2xl"
+        />
 
-        <div className="h-2/3 w-[40rem] rounded-lg bg-zinc-800" />
+        <Image
+          src={shoesImage}
+          alt="Shoes ecommerce project"
+          height={(window.innerHeight / 5) * 4}
+          className="rounded-2xl"
+        />
 
-        <div className="h-2/3 w-[40rem] rounded-lg bg-zinc-800" />
+        <Image
+          src={shoesImage}
+          alt="Shoes ecommerce project"
+          height={(window.innerHeight / 5) * 4}
+          className="rounded-2xl"
+        />
 
-        <div className="h-2/3 w-[40rem] rounded-lg bg-zinc-800" />
+        <Image
+          src={shoesImage}
+          alt="Shoes ecommerce project"
+          height={(window.innerHeight / 5) * 4}
+          className="rounded-2xl"
+        />
       </motion.div>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <h2
-          className="-mb-6 text-5xl sm:text-extra"
-          onMouseEnter={() => setMouseVariant(MouseVariant.TEXT)}
-          onMouseLeave={() => setMouseVariant(MouseVariant.DEFAULT)}
+          className="header -mb-6 inline"
+          onMouseEnter={setMouseVariant.text}
+          onMouseLeave={setMouseVariant.default}
         >
           Want to see more? <span className="text-violet-600">Checkout</span> my{' '}
         </h2>
@@ -44,9 +66,9 @@ const ProjectList = () => {
           href="https://github.com/kriziu"
           target="_black"
           rel="noreferrer"
-          className="cursor-none text-extra underline"
-          onMouseEnter={() => setMouseVariant(MouseVariant.BUTTON)}
-          onMouseLeave={() => setMouseVariant(MouseVariant.DEFAULT)}
+          className="header inline cursor-none underline "
+          onMouseEnter={setMouseVariant.button}
+          onMouseLeave={setMouseVariant.default}
         >
           Github.
         </a>

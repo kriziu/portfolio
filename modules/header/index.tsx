@@ -1,4 +1,4 @@
-import { useMouseVariant, MouseVariant } from '@/modules/customMouse';
+import { useMouseVariant } from '@/modules/customMouse';
 
 const Header = () => {
   const { setMouseVariant } = useMouseVariant();
@@ -10,9 +10,9 @@ const Header = () => {
           Bruno Dzięcielski - Full-stack developer
         </p>
         <h1
-          className="text-5xl sm:text-extra"
-          onMouseEnter={() => setMouseVariant(MouseVariant.TEXT)}
-          onMouseLeave={() => setMouseVariant(MouseVariant.DEFAULT)}
+          className="header"
+          onMouseEnter={setMouseVariant.text}
+          onMouseLeave={setMouseVariant.default}
         >
           A passionate, focused on <br />
           making <span className="text-violet-600">things</span> the right way.
