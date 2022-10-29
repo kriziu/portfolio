@@ -28,4 +28,15 @@ html {
   .header {
     @apply text-5xl sm:text-extra;
   }
+
+  .primary-gradient {
+    @apply bg-gradient-to-r from-[#ee0979] to-[#ff6a00];
+  }
+
+  .text-gradient {
+    @apply primary-gradient bg-clip-text text-transparent;
+  }
 }
+
+/* from-[#1f4037] to-[#99f2c8] */
+/* from-[#ee0979] to-[#ff6a00] */

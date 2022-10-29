@@ -60,7 +60,7 @@ const ProjectList = () => {
           onMouseEnter={setMouseVariant.text}
           onMouseLeave={setMouseVariant.default}
         >
-          Want to see more? <span className="text-violet-600">Checkout</span> my{' '}
+          Want to see more? <span className="text-gradient">Checkout</span> my{' '}
         </h2>
         <a
           href="https://github.com/kriziu"

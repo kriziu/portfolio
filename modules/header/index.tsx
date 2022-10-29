@@ -15,7 +15,7 @@ const Header = () => {
           onMouseLeave={setMouseVariant.default}
         >
           A passionate, focused on <br />
-          making <span className="text-violet-600">things</span> the right way.
+          making <span className="text-gradient">things</span> the right way.
         </h1>
 
         <p className="mt-10 text-lg text-zinc-500 sm:text-xl">
