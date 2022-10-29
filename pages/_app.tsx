@@ -1,6 +1,7 @@
 import '@/common/styles/global.css';
 
 import localFont from '@next/font/local';
+import { Analytics } from '@vercel/analytics/react';
 import { MotionConfig } from 'framer-motion';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -28,6 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </MouseVariantProvider>
         </MotionConfig>
       </div>
+      <Analytics />
     </>
   );
 }
