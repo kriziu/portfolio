@@ -9,6 +9,7 @@ export default function HomePage() {
   return (
     <>
       <CustomMouse />
+
       <Parallax pages={10} id="__parallax">
         <ParallaxLayer>
           <Header />

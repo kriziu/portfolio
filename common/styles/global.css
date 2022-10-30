@@ -46,6 +46,10 @@ html {
   .text-gradient {
     @apply primary-gradient bg-clip-text text-transparent;
   }
+
+  .sans {
+    @apply font-sans;
+  }
 }
 
 /* from-[#1f4037] to-[#99f2c8] */
