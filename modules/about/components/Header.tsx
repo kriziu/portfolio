@@ -1,17 +1,27 @@
 import { motion } from 'framer-motion';
 
 import { useScrollY } from '@/common/hooks/useScrollY';
+import { useWindowSize } from '@/common/hooks/useWindowSize';
 import { useMouseVariant } from '@/modules/customMouse';
 
 const AboutHeader = () => {
   const { setMouseVariant } = useMouseVariant();
   const scrolled = useScrollY();
 
+  const { width } = useWindowSize();
+
+  const mobile = width < 768;
+
+  const scale = Math.max(
+    0,
+    (mobile ? 1.5 : 1) - scrolled / (mobile ? 1200 : 3500)
+  );
+
   return (
     <motion.h2
-      className="mt-2 h-min whitespace-nowrap text-center text-6xl"
+      className="h-min whitespace-nowrap text-center text-[10vw]"
       style={{
-        fontSize: `calc(max(12vw, 13vh) - ${scrolled / 10}px)`,
+        scale,
       }}
       onMouseEnter={setMouseVariant.text}
       onMouseLeave={setMouseVariant.default}

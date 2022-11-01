@@ -14,7 +14,7 @@ export default function HomePage() {
           <Hero />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={1} factor={2}>
+        <ParallaxLayer offset={1} factor={3}>
           <About />
         </ParallaxLayer>
       </Parallax>

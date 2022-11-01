@@ -10,7 +10,7 @@ const About = () => {
       <AboutHeader />
 
       <p
-        className="header mt-36 block px-8 text-center sm:px-16 md:mt-48 lg:w-1/2 lg:px-0 xl:mt-96"
+        className="header mt-72 block px-8 text-center sm:px-16 md:mt-96 lg:w-2/3 lg:px-0 2xl:w-[75rem]"
         onMouseEnter={setMouseVariant.text}
         onMouseLeave={setMouseVariant.default}
       >
