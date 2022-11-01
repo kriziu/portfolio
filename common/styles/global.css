@@ -30,7 +30,7 @@ span {
 
 @layer components {
   .header {
-    @apply text-5xl sm:text-extra;
+    @apply text-4xl sm:text-5xl md:text-6xl 2xl:text-8xl;
   }
 
   .primary-gradient {

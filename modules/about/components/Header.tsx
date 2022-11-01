@@ -11,14 +11,14 @@ const AboutHeader = () => {
     <motion.h2
       className="mt-2 h-min whitespace-nowrap text-center text-6xl"
       style={{
-        fontSize: `calc(max(10vw, 14vh) - ${scrolled / 11}px)`,
+        fontSize: `calc(max(12vw, 13vh) - ${scrolled / 10}px)`,
       }}
       onMouseEnter={setMouseVariant.text}
       onMouseLeave={setMouseVariant.default}
     >
-      I&apos;m Full stack <span className="text-gradient">developer</span> that{' '}
-      <br />
-      creates web based applications.
+      I&apos;m Full stack <span className="text-gradient">developer</span>{' '}
+      <br /> that creates amazing <br />
+      <span className="text-gradient">web</span> based applications.
     </motion.h2>
   );
 };

@@ -5,7 +5,7 @@ import { itemVariant } from '../animations/scrollAnimation';
 const ScrollIndicator = () => {
   return (
     <motion.div
-      className="mt-16 flex flex-col items-center gap-16"
+      className="flex w-full flex-1 flex-col items-center justify-around"
       transition={{
         staggerChildren: 0.1,
         delayChildren: 0.5,

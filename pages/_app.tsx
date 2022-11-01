@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>EDIT HERE</title>
+        <title>Bruno Dzięcielski | Full stack Developer</title>
         <meta name="description" content="EDIT HERE" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
