@@ -17,7 +17,14 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Bruno Dzięcielski | Full stack Developer</title>
-        <meta name="description" content="EDIT HERE" />
+        <meta
+          name="description"
+          content="Portoflio site of Full stack Developer Bruno Dzięcielski."
+        />
+        <meta
+          name="keywords"
+          content="developer, bruno, dziecielski, full stack"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div id="__font" className={ArticulatCF.className}>
