@@ -18,19 +18,21 @@ const AboutHeader = () => {
   );
 
   return (
-    <motion.h2
-      className="h-min whitespace-nowrap text-center text-[10vw]"
-      style={{
-        scale,
-      }}
-      onMouseEnter={setMouseVariant.text}
-      onMouseLeave={setMouseVariant.default}
-    >
-      I&apos;m Bruno, <br /> Full stack{' '}
-      <span className="text-gradient">Developer</span> <br /> that creates
-      interactive <br />
-      <span className="text-gradient">web</span> applications.
-    </motion.h2>
+    <div className="-mt-24 flex h-full w-full items-center justify-center overflow-hidden sm:mt-24">
+      <motion.h2
+        className="h-min whitespace-nowrap text-center text-[10vw]"
+        style={{
+          scale,
+        }}
+        onMouseEnter={setMouseVariant.text}
+        onMouseLeave={setMouseVariant.default}
+      >
+        I&apos;m Bruno, <br /> Full stack{' '}
+        <span className="text-gradient">Developer</span> <br /> that creates
+        interactive <br />
+        <span className="text-gradient">web</span> applications.
+      </motion.h2>
+    </div>
   );
 };
 
