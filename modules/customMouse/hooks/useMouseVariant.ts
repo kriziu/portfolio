@@ -4,13 +4,17 @@ import { mouseContext } from '../context/mouseContext';
 import { MouseVariant } from '../types/mouse.type';
 
 export const useMouseVariant = () => {
-  const { variant, setVariant } = useContext(mouseContext);
+  const { variant, setVariant, text, setText } = useContext(mouseContext);
 
   const setMouseVariant = {
     default: () => setVariant(MouseVariant.DEFAULT),
     text: () => setVariant(MouseVariant.TEXT),
     button: () => setVariant(MouseVariant.BUTTON),
+    technology: (newText: string) => {
+      setVariant(MouseVariant.TECHNOLOGY);
+      setText(newText);
+    },
   };
 
-  return { mouseVariant: variant, setMouseVariant };
+  return { mouseVariant: variant, setMouseVariant, text };
 };

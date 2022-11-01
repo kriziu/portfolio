@@ -15,6 +15,10 @@ html {
   height: -webkit-fill-available;
 }
 
+span {
+  display: inline-block;
+}
+
 #__next,
 #__font {
   position: absolute;
