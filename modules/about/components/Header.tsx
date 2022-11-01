@@ -14,7 +14,7 @@ const AboutHeader = () => {
 
   const scale = Math.max(
     0,
-    (mobile ? 1.5 : 1) - scrolled / (mobile ? 1200 : 3500)
+    (mobile ? 1.3 : 1) - scrolled / (mobile ? 1400 : 3500)
   );
 
   return (
@@ -26,9 +26,10 @@ const AboutHeader = () => {
       onMouseEnter={setMouseVariant.text}
       onMouseLeave={setMouseVariant.default}
     >
-      I&apos;m Full stack <span className="text-gradient">developer</span>{' '}
-      <br /> that creates interactive <br />
-      <span className="text-gradient">web</span> based applications.
+      I&apos;m Bruno, <br /> Full stack{' '}
+      <span className="text-gradient">Developer</span> <br /> that creates
+      interactive <br />
+      <span className="text-gradient">web</span> applications.
     </motion.h2>
   );
 };
