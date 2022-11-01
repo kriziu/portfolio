@@ -29,6 +29,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('TypeScript')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={nextSVG}
@@ -36,6 +37,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('Next.js')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={reactSVG}
@@ -43,6 +45,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('React.js')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={recoilSVG}
@@ -50,6 +53,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('Recoil.js')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
 
       <Image
@@ -58,6 +62,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('Nest.js')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={expressSVG}
@@ -65,6 +70,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('Express.js')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={nodeSVG}
@@ -72,6 +78,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('Node.js')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
 
       <Image
@@ -80,6 +87,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('MongoDB')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={graphQLSVG}
@@ -87,6 +95,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('GraphQL')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={socketIoSVG}
@@ -94,6 +103,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('Socket.io')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={tailwindSVG}
@@ -101,6 +111,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('TailwindCSS')}
         onMouseLeave={setMouseVariant.default}
         className="h-7 w-max lg:h-10"
+        priority
       />
       <Image
         src={framerMotionSVG}
@@ -108,6 +119,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('Framer-motion')}
         onMouseLeave={setMouseVariant.default}
         className={svgClassName}
+        priority
       />
       <Image
         src={webRTCSVG}
@@ -115,6 +127,7 @@ const Skills = () => {
         onMouseEnter={() => setMouseVariant.technology('WebRTC')}
         onMouseLeave={setMouseVariant.default}
         className="h-7 w-max lg:h-10"
+        priority
       />
     </motion.div>
   );

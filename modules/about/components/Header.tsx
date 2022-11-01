@@ -27,7 +27,7 @@ const AboutHeader = () => {
       onMouseLeave={setMouseVariant.default}
     >
       I&apos;m Full stack <span className="text-gradient">developer</span>{' '}
-      <br /> that creates amazing <br />
+      <br /> that creates interactive <br />
       <span className="text-gradient">web</span> based applications.
     </motion.h2>
   );
