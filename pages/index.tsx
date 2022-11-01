@@ -1,6 +1,7 @@
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 
 import About, { AboutHeader } from '@/modules/about';
+import Windows, { CollabioHeader } from '@/modules/collabio';
 import CustomMouse from '@/modules/customMouse';
 import Hero from '@/modules/hero';
 
@@ -22,10 +23,12 @@ export default function HomePage() {
           <About />
         </ParallaxLayer>
 
-        <ParallaxLayer sticky={{ start: 3, end: 4 }}>
-          <div className="header flex h-full w-full items-center justify-center">
-            Lorem ipsum
-          </div>
+        <ParallaxLayer offset={3}>
+          <CollabioHeader />
+        </ParallaxLayer>
+
+        <ParallaxLayer sticky={{ start: 3.5, end: 5 }}>
+          <Windows />
         </ParallaxLayer>
       </Parallax>
     </>
