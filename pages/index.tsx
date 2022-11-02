@@ -28,7 +28,7 @@ export default function HomePage() {
         </ParallaxLayer>
 
         <ParallaxLayer sticky={{ start: 3.5, end: 5 }}>
-          <Windows />
+          <Windows windowLength={1.5} />
         </ParallaxLayer>
       </Parallax>
     </>
