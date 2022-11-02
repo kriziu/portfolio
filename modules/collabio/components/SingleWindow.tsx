@@ -133,10 +133,24 @@ const SingleWindow = ({
           </div>
         </div>
 
-        <div className="relative flex flex-1 items-center" ref={windowRef}>
+        <div
+          className="relative flex flex-1 items-center"
+          ref={windowRef}
+          onMouseEnter={setMouseVariant.drawing}
+          onMouseLeave={setMouseVariant.default}
+          onMouseMove={(e) => {
+            const rect = windowRef.current?.getBoundingClientRect();
+            if (rect) {
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+
+              setMousePosition({ x, y });
+            }
+          }}
+        >
           <motion.div
             style={{ ...mousePosition }}
-            className="absolute top-0 left-0 lg:text-xl"
+            className="absolute top-0 left-0 z-10 lg:text-xl "
           >
             <BsCursorFill className="-rotate-90 fill-yellow-500" />
           </motion.div>
@@ -145,15 +159,6 @@ const SingleWindow = ({
             ref={canvasRef}
             className="absolute top-0 left-0"
             style={{ width, height }}
-            onMouseEnter={setMouseVariant.drawing}
-            onMouseLeave={setMouseVariant.default}
-            onMouseMove={(e) => {
-              const rect = (e.target as HTMLElement).getBoundingClientRect();
-              const x = e.clientX - rect.left;
-              const y = e.clientY - rect.top;
-
-              setMousePosition({ x, y });
-            }}
           />
           <div className="z-10 ml-3 h-2/3 w-6 rounded-lg bg-zinc-900" />
           <motion.div

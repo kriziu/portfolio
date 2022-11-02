@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { useMouseVariant } from '../hooks/useMouseVariant';
 import { MouseVariant } from '../types/mouse.type';
 
+const defaultTransition = { type: 'spring', stiffness: 2000, damping: 100 };
+
 const CircleMouse = () => {
   const { mouseVariant, text } = useMouseVariant();
 
@@ -91,13 +93,17 @@ const CircleMouse = () => {
       animate={mouseVariant}
       className="primary-gradient pointer-events-none fixed top-0 left-0 z-50 flex h-8 w-8 items-center justify-center rounded-full text-center text-xl text-black"
       transition={{
-        default: {
-          type: 'spring',
-          stiffness: 2000,
-          damping: 100,
-        },
-        x: { duration: 0 },
-        y: { duration: 0 },
+        default: defaultTransition,
+        x:
+          mouseVariant === MouseVariant.DRAWING ||
+          mouseVariant === MouseVariant.GAME
+            ? { duration: 0 }
+            : defaultTransition,
+        y:
+          mouseVariant === MouseVariant.DRAWING ||
+          mouseVariant === MouseVariant.GAME
+            ? { duration: 0 }
+            : defaultTransition,
       }}
     >
       {mouseVariant === MouseVariant.BUTTON && 'Click'}
