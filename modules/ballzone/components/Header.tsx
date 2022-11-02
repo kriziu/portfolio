@@ -12,7 +12,7 @@ const Header = () => {
           onMouseEnter={setMouseVariant.text}
           onMouseLeave={setMouseVariant.default}
         >
-          and also games.
+          and games...
         </p>
       </ScrollOpacity>
     </div>

@@ -27,7 +27,7 @@ const AboutHeader = () => {
         onMouseEnter={setMouseVariant.text}
         onMouseLeave={setMouseVariant.default}
       >
-        I&apos;m Bruno, <br /> Full stack{' '}
+        I&apos;m Bruno, <br />a Full stack{' '}
         <span className="text-gradient">Developer</span> <br /> that creates
         interactive <br />
         <span className="text-gradient">web</span> applications.
