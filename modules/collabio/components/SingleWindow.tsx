@@ -7,21 +7,35 @@ import { BsCursorFill } from 'react-icons/bs';
 import { useMouseVariant } from '@/modules/customMouse';
 
 import { calcPos } from '../helpers/calcPos';
+import { drawLines } from '../helpers/drawLines';
+import { drawPath } from '../helpers/drawPath';
+import { Draw } from '../helpers/handleDraw';
+
+interface Props {
+  second?: boolean;
+  progress: number;
+  mousePosition: { x: number; y: number };
+  setMousePosition: (mousePosition: { x: number; y: number }) => void;
+  userMoves: { x: number; y: number }[][];
+  addUserMove: (userMoves: { x: number; y: number }[]) => void;
+  setCtx: (ctx: CanvasRenderingContext2D) => void;
+  oppositeCtx: CanvasRenderingContext2D | undefined;
+}
 
 const SingleWindow = ({
   second = false,
   progress,
   mousePosition,
   setMousePosition,
-}: {
-  second?: boolean;
-  progress: number;
-  mousePosition: { x: number; y: number };
-  setMousePosition: (mousePosition: { x: number; y: number }) => void;
-}) => {
+  userMoves,
+  addUserMove,
+  setCtx,
+  oppositeCtx,
+}: Props) => {
   const { setMouseVariant } = useMouseVariant();
 
   const [{ width, height }, setDimensions] = useState({ width: 0, height: 0 });
+  const [isDrawing, setIsDrawing] = useState(false);
 
   const windowRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -42,12 +56,16 @@ const SingleWindow = ({
       resizeObserver.observe(node);
     }
 
+    const ctx = canvasRef.current?.getContext('2d');
+
+    if (ctx) setCtx(ctx);
+
     return () => {
       if (node) {
         resizeObserver.unobserve(node);
       }
     };
-  }, []);
+  }, [second, setCtx]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -63,28 +81,7 @@ const SingleWindow = ({
       if (ctx) {
         ctx.scale(dpi, dpi);
 
-        ctx.strokeStyle = '#ddd';
-        ctx.lineWidth = 1;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-
-        const lineFactor = width > 450 ? 10 : 7;
-
-        for (let i = 0; i < width; i += lineFactor) {
-          ctx.beginPath();
-          ctx.moveTo(i, 0);
-          ctx.lineTo(i, height);
-          ctx.stroke();
-          ctx.closePath();
-        }
-
-        for (let i = 0; i < height; i += lineFactor) {
-          ctx.beginPath();
-          ctx.moveTo(0, i);
-          ctx.lineTo(width, i);
-          ctx.stroke();
-          ctx.closePath();
-        }
+        drawLines(ctx, { width, height });
 
         const moves1: { x: number; y: number }[] = [];
         const moves2: { x: number; y: number }[] = [];
@@ -99,22 +96,13 @@ const SingleWindow = ({
         ctx.strokeStyle = '#000';
         ctx.lineWidth = 2;
 
-        ctx.beginPath();
-        moves2.forEach((move) => {
-          ctx.lineTo(move.x, move.y);
-        });
-        ctx.stroke();
-        ctx.closePath();
+        drawPath(ctx, moves1);
+        drawPath(ctx, moves2);
 
-        ctx.beginPath();
-        moves1.forEach((move) => {
-          ctx.lineTo(move.x, move.y);
-        });
-        ctx.stroke();
-        ctx.closePath();
+        userMoves.forEach((moves) => drawPath(ctx, moves));
       }
     }
-  }, [width, height, progress]);
+  }, [width, height, progress, userMoves]);
 
   const { client1, client2 } = calcPos(progress, { width, height });
 
@@ -146,6 +134,21 @@ const SingleWindow = ({
 
               setMousePosition({ x, y });
             }
+
+            if (isDrawing && oppositeCtx) {
+              Draw.handleDraw(e, canvasRef.current, oppositeCtx);
+            }
+          }}
+          onMouseDown={(e) => {
+            setIsDrawing(true);
+            Draw.handleDrawStart(canvasRef.current);
+            if (oppositeCtx) {
+              Draw.handleDraw(e, canvasRef.current, oppositeCtx);
+            }
+          }}
+          onMouseUp={() => {
+            setIsDrawing(false);
+            Draw.handleDrawEnd(addUserMove);
           }}
         >
           <motion.div

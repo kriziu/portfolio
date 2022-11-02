@@ -11,7 +11,11 @@ const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
   const { height } = useWindowSize();
   const scrollY = useScrollY();
 
+  const [client1Ctx, setClient1Ctx] = useState<CanvasRenderingContext2D>();
+  const [client2Ctx, setClient2Ctx] = useState<CanvasRenderingContext2D>();
+
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
+  const [userMoves, setUserMoves] = useState<{ x: number; y: number }[][]>([]);
 
   const startScroll = useRef(0);
 
@@ -46,12 +50,20 @@ const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
         progress={progress}
         mousePosition={mousePosition}
         setMousePosition={setMousePosition}
+        userMoves={userMoves}
+        addUserMove={(move) => setUserMoves([...userMoves, move])}
+        setCtx={setClient1Ctx}
+        oppositeCtx={client2Ctx}
       />
       <SingleWindow
         second
         progress={progress}
         mousePosition={mousePosition}
         setMousePosition={setMousePosition}
+        userMoves={userMoves}
+        addUserMove={(move) => setUserMoves([...userMoves, move])}
+        setCtx={setClient2Ctx}
+        oppositeCtx={client1Ctx}
       />
     </motion.div>
   );
