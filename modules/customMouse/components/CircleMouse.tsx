@@ -61,6 +61,28 @@ const CircleMouse = () => {
       backgroundImage:
         'linear-gradient(rgba(255,255,255, 1), rgba(255,255,255, 1))',
     },
+    [MouseVariant.DRAWING]: {
+      height: 50,
+      width: 50,
+
+      x: mousePosition.x - 25,
+      y: mousePosition.y - 25,
+
+      backgroundImage:
+        'linear-gradient(rgba(255,255,255, 0), rgba(255,255,255, 0))',
+    },
+    [MouseVariant.GAME]: {
+      height: 40,
+      width: 40,
+
+      x: mousePosition.x - 20,
+      y: mousePosition.y - 20,
+
+      border: '2px solid black',
+
+      backgroundImage:
+        'linear-gradient(rgba(37, 99, 235, 1), rgba(37, 99, 235, 1))',
+    },
   };
 
   return (
@@ -68,7 +90,15 @@ const CircleMouse = () => {
       variants={variants}
       animate={mouseVariant}
       className="primary-gradient pointer-events-none fixed top-0 left-0 z-50 flex h-8 w-8 items-center justify-center rounded-full text-center text-xl text-black"
-      transition={{ type: 'spring', stiffness: 2000, damping: 100 }}
+      transition={{
+        default: {
+          type: 'spring',
+          stiffness: 2000,
+          damping: 100,
+        },
+        x: { duration: 0 },
+        y: { duration: 0 },
+      }}
     >
       {mouseVariant === MouseVariant.BUTTON && 'Click'}
       {mouseVariant === MouseVariant.TECHNOLOGY && text}

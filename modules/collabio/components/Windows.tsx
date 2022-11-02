@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -10,6 +10,8 @@ import SingleWindow from './SingleWindow';
 const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
   const { height } = useWindowSize();
   const scrollY = useScrollY();
+
+  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
 
   const startScroll = useRef(0);
 
@@ -40,8 +42,17 @@ const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
         }
       }}
     >
-      <SingleWindow progress={progress} />
-      <SingleWindow second progress={progress} />
+      <SingleWindow
+        progress={progress}
+        mousePosition={mousePosition}
+        setMousePosition={setMousePosition}
+      />
+      <SingleWindow
+        second
+        progress={progress}
+        mousePosition={mousePosition}
+        setMousePosition={setMousePosition}
+      />
     </motion.div>
   );
 };

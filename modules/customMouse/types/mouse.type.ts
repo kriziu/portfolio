@@ -3,4 +3,6 @@ export enum MouseVariant {
   TEXT = 'text',
   BUTTON = 'button',
   TECHNOLOGY = 'technology',
+  DRAWING = 'drawing',
+  GAME = 'game',
 }

@@ -4,15 +4,23 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { BsCursorFill } from 'react-icons/bs';
 
+import { useMouseVariant } from '@/modules/customMouse';
+
 import { calcPos } from '../helpers/calcPos';
 
 const SingleWindow = ({
   second = false,
   progress,
+  mousePosition,
+  setMousePosition,
 }: {
   second?: boolean;
   progress: number;
+  mousePosition: { x: number; y: number };
+  setMousePosition: (mousePosition: { x: number; y: number }) => void;
 }) => {
+  const { setMouseVariant } = useMouseVariant();
+
   const [{ width, height }, setDimensions] = useState({ width: 0, height: 0 });
 
   const windowRef = useRef<HTMLDivElement>(null);
@@ -126,10 +134,26 @@ const SingleWindow = ({
         </div>
 
         <div className="relative flex flex-1 items-center" ref={windowRef}>
+          <motion.div
+            style={{ ...mousePosition }}
+            className="absolute top-0 left-0 lg:text-xl"
+          >
+            <BsCursorFill className="-rotate-90 fill-yellow-500" />
+          </motion.div>
+
           <canvas
             ref={canvasRef}
             className="absolute top-0 left-0"
             style={{ width, height }}
+            onMouseEnter={setMouseVariant.drawing}
+            onMouseLeave={setMouseVariant.default}
+            onMouseMove={(e) => {
+              const rect = (e.target as HTMLElement).getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+
+              setMousePosition({ x, y });
+            }}
           />
           <div className="z-10 ml-3 h-2/3 w-6 rounded-lg bg-zinc-900" />
           <motion.div

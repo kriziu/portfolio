@@ -14,6 +14,8 @@ export const useMouseVariant = () => {
       setVariant(MouseVariant.TECHNOLOGY);
       setText(newText);
     },
+    drawing: () => setVariant(MouseVariant.DRAWING),
+    game: () => setVariant(MouseVariant.GAME),
   };
 
   return { mouseVariant: variant, setMouseVariant, text };
