@@ -18,7 +18,7 @@ const AboutHeader = () => {
   );
 
   return (
-    <div className="-mt-24 flex h-full w-full items-center justify-center overflow-hidden sm:mt-24">
+    <div className="-mt-24 flex h-full w-full items-center justify-center sm:mt-24">
       <motion.h2
         className="h-min whitespace-nowrap text-center text-[10vw]"
         style={{
