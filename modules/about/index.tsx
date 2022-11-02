@@ -15,7 +15,7 @@ const AboutSkills = () => {
         onMouseLeave={setMouseVariant.default}
       >
         With over 2 years of experience, I use the latest technologies to make
-        fascinating things.
+        fascinating things...
       </p>
 
       <Skills />

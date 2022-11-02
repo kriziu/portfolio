@@ -1,6 +1,7 @@
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 
 import About, { AboutHeader } from '@/modules/about';
+import Game, { BallzoneHeader } from '@/modules/ballzone';
 import Windows, { CollabioHeader } from '@/modules/collabio';
 import CustomMouse from '@/modules/customMouse';
 import Hero from '@/modules/hero';
@@ -29,6 +30,14 @@ export default function HomePage() {
 
         <ParallaxLayer sticky={{ start: 3.5, end: 5 }}>
           <Windows windowLength={1.5} />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={5.8}>
+          <BallzoneHeader />
+        </ParallaxLayer>
+
+        <ParallaxLayer sticky={{ start: 6.3, end: 7 }}>
+          <Game />
         </ParallaxLayer>
       </Parallax>
     </>
