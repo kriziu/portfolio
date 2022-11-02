@@ -1,5 +1,3 @@
-import { MouseEvent } from 'react';
-
 import { drawPath } from './drawPath';
 
 let path: { x: number; y: number }[] = [];
@@ -14,7 +12,7 @@ const drawCtx = (ctx: CanvasRenderingContext2D) => {
 };
 
 const handleDraw = (
-  e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
+  { clientX, clientY }: { clientX: number; clientY: number },
   canvas: HTMLCanvasElement | null,
   secondCtx: CanvasRenderingContext2D | null
 ) => {
@@ -22,8 +20,6 @@ const handleDraw = (
     const ctx = canvas.getContext('2d');
 
     if (ctx && secondCtx) {
-      const { clientX, clientY } = e;
-
       const { x, y } = canvas.getBoundingClientRect();
 
       const mouseX = clientX - x;

@@ -122,7 +122,7 @@ const SingleWindow = ({
         </div>
 
         <div
-          className="relative flex flex-1 items-center"
+          className="relative flex flex-1 touch-none items-center"
           ref={windowRef}
           onMouseEnter={setMouseVariant.drawing}
           onMouseLeave={setMouseVariant.default}
@@ -147,6 +147,22 @@ const SingleWindow = ({
             }
           }}
           onMouseUp={() => {
+            setIsDrawing(false);
+            Draw.handleDrawEnd(addUserMove);
+          }}
+          onTouchStart={(e) => {
+            setIsDrawing(true);
+            Draw.handleDrawStart(canvasRef.current);
+            if (oppositeCtx) {
+              Draw.handleDraw(e.touches[0], canvasRef.current, oppositeCtx);
+            }
+          }}
+          onTouchMove={(e) => {
+            if (isDrawing && oppositeCtx) {
+              Draw.handleDraw(e.touches[0], canvasRef.current, oppositeCtx);
+            }
+          }}
+          onTouchEnd={() => {
             setIsDrawing(false);
             Draw.handleDrawEnd(addUserMove);
           }}
