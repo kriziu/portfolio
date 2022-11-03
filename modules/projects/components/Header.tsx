@@ -12,18 +12,18 @@ const Header = () => {
 
   const [startScroll, setStartScroll] = useState(0);
 
-  const scale = Math.max((scrollY - startScroll) / 3000 + 0.8);
+  const scale = Math.max((scrollY - startScroll) / 5000 + 0.2);
 
   return (
     <div className="absolute z-50 flex h-full w-full flex-col items-center justify-center px-10">
       <ScrollOpacity center setStartScroll={setStartScroll}>
         <motion.p
-          className="header text-center"
+          className="w-max text-center"
           onMouseEnter={setMouseVariant.text}
           onMouseLeave={setMouseVariant.default}
-          style={{ scale }}
+          style={{ scale, fontSize: 'max(10vw, 12vh)' }}
         >
-          and even more.
+          and more.
         </motion.p>
       </ScrollOpacity>
     </div>
