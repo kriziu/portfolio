@@ -46,7 +46,7 @@ const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
         }
       }}
     >
-      <p className="absolute text-zinc-500 xl:static">
+      <p className="absolute text-zinc-400 xl:static">
         (try to draw something on the screen)
       </p>
       <div className="flex w-full flex-col items-center justify-center gap-10 xl:flex-row">
