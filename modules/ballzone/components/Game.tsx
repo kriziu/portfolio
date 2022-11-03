@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import { useElementDimensions } from '@/common/hooks/useElementDimensions';
+import { hasMouse } from '@/common/lib/hasMouse';
 import { useMouseVariant } from '@/modules/customMouse';
 
 import { handleBallPosition } from '../helpers/handleBall';
@@ -142,7 +143,12 @@ const Game = () => {
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center px-3">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 px-3">
+      <p className="text-zinc-500">
+        {hasMouse()
+          ? '(try to move ball with your mouse)'
+          : '(try to move ball with your finger)'}
+      </p>
       <motion.div
         className="relative flex h-[68vw] w-full flex-col items-center justify-center sm:h-[50vw] sm:w-3/4 md:h-[45vw] xl:h-[40vw] xl:w-2/3"
         onViewportEnter={() => setRun(true)}
