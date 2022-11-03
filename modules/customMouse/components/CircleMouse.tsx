@@ -5,8 +5,6 @@ import { motion } from 'framer-motion';
 import { useMouseVariant } from '../hooks/useMouseVariant';
 import { MouseVariant } from '../types/mouse.type';
 
-const defaultTransition = { type: 'spring', stiffness: 2000, damping: 100 };
-
 const CircleMouse = () => {
   const { mouseVariant, text } = useMouseVariant();
 
@@ -64,26 +62,18 @@ const CircleMouse = () => {
         'linear-gradient(rgba(255,255,255, 1), rgba(255,255,255, 1))',
     },
     [MouseVariant.DRAWING]: {
-      height: 50,
-      width: 50,
+      height: 0,
+      width: 0,
 
-      x: mousePosition.x - 25,
-      y: mousePosition.y - 25,
-
-      backgroundImage:
-        'linear-gradient(rgba(255,255,255, 0), rgba(255,255,255, 0))',
+      x: mousePosition.x,
+      y: mousePosition.y,
     },
     [MouseVariant.GAME]: {
-      height: 40,
-      width: 40,
+      height: 0,
+      width: 0,
 
-      x: mousePosition.x - 20,
-      y: mousePosition.y - 20,
-
-      border: '2px solid black',
-
-      backgroundImage:
-        'linear-gradient(rgba(37, 99, 235, 1), rgba(37, 99, 235, 1))',
+      x: mousePosition.x,
+      y: mousePosition.y,
     },
   };
 
@@ -92,19 +82,7 @@ const CircleMouse = () => {
       variants={variants}
       animate={mouseVariant}
       className="primary-gradient pointer-events-none fixed top-0 left-0 z-50 flex h-8 w-8 items-center justify-center rounded-full text-center text-xl text-black"
-      transition={{
-        default: defaultTransition,
-        x:
-          mouseVariant === MouseVariant.DRAWING ||
-          mouseVariant === MouseVariant.GAME
-            ? { duration: 0 }
-            : defaultTransition,
-        y:
-          mouseVariant === MouseVariant.DRAWING ||
-          mouseVariant === MouseVariant.GAME
-            ? { duration: 0 }
-            : defaultTransition,
-      }}
+      transition={{ type: 'spring', stiffness: 2000, damping: 100 }}
     >
       {mouseVariant === MouseVariant.BUTTON && 'Click'}
       {mouseVariant === MouseVariant.TECHNOLOGY && text}

@@ -1,43 +1,48 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
+import { useElementDimensions } from '@/common/hooks/useElementDimensions';
 import { useMouseVariant } from '@/modules/customMouse';
 
-const MOVE_AREA_SIZE = 30;
+import { handleBallPosition } from '../helpers/handleBall';
+import { renderBoard } from '../helpers/renderBoard';
+import { Ball } from '../types/ball.type';
 
 const Game = () => {
   const { setMouseVariant } = useMouseVariant();
 
-  const [{ width, height }, setDimensions] = useState({ width: 0, height: 0 });
+  const playerPosition = useRef({ x: 0, y: 0 });
+  const ball = useRef<Ball>({
+    position: { x: 0, y: 0 },
+    velocityVector: { x: 0, y: 0 },
+  });
 
   const windowRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const ballRef = useRef<HTMLCanvasElement>(null);
+  const movablesRef = useRef<HTMLCanvasElement>(null);
 
+  const { width, height } = useElementDimensions(windowRef);
+
+  const small = width < 700;
+  const lineWidth = small ? 2 : 4;
+  const playerSize = small ? 12 : 18;
+  const ballSize = small ? 9 : 14;
+  const goalHeight = height / 5;
+
+  // BOARD RENDERING
   useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
-        setDimensions({
-          width: entry.contentRect.width,
-          height: entry.contentRect.height,
-        });
+    if (canvasRef.current)
+      renderBoard(canvasRef.current, {
+        boardSize: { width, height },
+        lineWidth,
+        goalHeight,
+        playerSize,
+        small,
       });
-    });
+  }, [width, height, lineWidth, playerSize, small, goalHeight]);
 
-    const node = windowRef.current;
-
-    if (node) {
-      resizeObserver.observe(node);
-    }
-
-    return () => {
-      if (node) {
-        resizeObserver.unobserve(node);
-      }
-    };
-  }, []);
-
+  // MOVABLES SETUP
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = movablesRef.current;
 
     if (canvas) {
       const dpi = window.devicePixelRatio;
@@ -45,76 +50,92 @@ const Game = () => {
       canvas.width = width * dpi;
       canvas.height = height * dpi;
 
+      ball.current.position = {
+        x: width / 2,
+        y: height / 2,
+      };
+
+      playerPosition.current = {
+        x: width - 100,
+        y: height / 2,
+      };
+
       const ctx = canvas.getContext('2d');
 
-      if (ctx) {
-        ctx.scale(dpi, dpi);
-
-        ctx.strokeStyle = '#54925A';
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-
-        const lineFactor = width > 450 ? 100 : 70;
-
-        ctx.lineWidth = lineFactor / 2;
-
-        for (let i = 0; i < width; i += lineFactor) {
-          ctx.beginPath();
-          ctx.moveTo(i, 0);
-          ctx.lineTo(i, height);
-          ctx.stroke();
-          ctx.closePath();
-        }
-
-        const small = width < 700;
-
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = small ? 2 : 4;
-        ctx.beginPath();
-        ctx.arc(width / 2, height / 2, small ? 35 : 75, 0, Math.PI * 2);
-        ctx.stroke();
-
-        ctx.moveTo(width / 2, MOVE_AREA_SIZE);
-        ctx.lineTo(width / 2, height - MOVE_AREA_SIZE);
-        ctx.stroke();
-        ctx.closePath();
-
-        ctx.strokeRect(
-          MOVE_AREA_SIZE,
-          MOVE_AREA_SIZE,
-          width - MOVE_AREA_SIZE * 2,
-          height - MOVE_AREA_SIZE * 2
-        );
-      }
+      if (ctx) ctx.scale(dpi, dpi);
     }
   }, [width, height]);
 
   useEffect(() => {
-    const canvas = ballRef.current;
+    const dpi = window.devicePixelRatio;
+    const canvas = movablesRef.current;
 
-    if (canvas) {
-      const dpi = window.devicePixelRatio;
+    const interval = setInterval(() => {
+      if (!canvas) return;
 
-      canvas.width = width * dpi;
-      canvas.height = height * dpi;
+      const newBall = handleBallPosition(ball.current, playerPosition.current, {
+        ballSize,
+        playerSize,
+        boardSize: {
+          width: canvas.width / dpi,
+          height: canvas.height / dpi,
+        },
+        goalHeight,
+      });
+      ball.current = newBall;
 
       const ctx = canvas.getContext('2d');
 
       if (ctx) {
-        ctx.scale(dpi, dpi);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // BALL
         ctx.fillStyle = '#fff';
         ctx.lineWidth = 2;
         ctx.strokeStyle = '#000';
         ctx.beginPath();
-        ctx.arc(width / 2, height / 2, 14, 0, Math.PI * 2);
+        ctx.arc(
+          ball.current.position.x,
+          ball.current.position.y,
+          ballSize,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        // PLAYER
+        ctx.fillStyle = '#3b82f6';
+        ctx.beginPath();
+        ctx.arc(
+          playerPosition.current.x,
+          playerPosition.current.y,
+          playerSize,
+          0,
+          Math.PI * 2
+        );
         ctx.fill();
         ctx.stroke();
         ctx.closePath();
       }
+    }, 1000 / 64);
+
+    return () => clearInterval(interval);
+  }, [ballSize, playerSize, goalHeight]);
+
+  const handleUserMove = ({ x, y }: { x: number; y: number }) => {
+    const node = windowRef.current;
+
+    if (node) {
+      const rect = node.getBoundingClientRect();
+
+      playerPosition.current = {
+        x: x - rect.left,
+        y: y - rect.top,
+      };
     }
-  }, [width, height]);
+  };
 
   return (
     <div className="flex h-full w-full items-center justify-center px-3">
@@ -132,9 +153,19 @@ const Game = () => {
             </div>
           </div>
 
-          <div className="relative flex flex-1 items-center" ref={windowRef}>
+          <div
+            className="relative flex flex-1 touch-none items-center"
+            ref={windowRef}
+            onMouseMove={(e) => handleUserMove({ x: e.clientX, y: e.clientY })}
+            onTouchMove={(e) =>
+              handleUserMove({
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY,
+              })
+            }
+          >
             <canvas
-              ref={ballRef}
+              ref={movablesRef}
               className="absolute top-0 left-0 z-10"
               style={{ width, height }}
               onMouseEnter={setMouseVariant.game}

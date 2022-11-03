@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { BsCursorFill } from 'react-icons/bs';
 
+import { useElementDimensions } from '@/common/hooks/useElementDimensions';
 import { useMouseVariant } from '@/modules/customMouse';
 
 import { calcPos } from '../helpers/calcPos';
@@ -34,38 +35,18 @@ const SingleWindow = ({
 }: Props) => {
   const { setMouseVariant } = useMouseVariant();
 
-  const [{ width, height }, setDimensions] = useState({ width: 0, height: 0 });
   const [isDrawing, setIsDrawing] = useState(false);
 
   const windowRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const { width, height } = useElementDimensions(windowRef);
+
   useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
-        setDimensions({
-          width: entry.contentRect.width,
-          height: entry.contentRect.height,
-        });
-      });
-    });
-
-    const node = windowRef.current;
-
-    if (node) {
-      resizeObserver.observe(node);
-    }
-
     const ctx = canvasRef.current?.getContext('2d');
 
     if (ctx) setCtx(ctx);
-
-    return () => {
-      if (node) {
-        resizeObserver.unobserve(node);
-      }
-    };
-  }, [second, setCtx]);
+  }, [setCtx]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
