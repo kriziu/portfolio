@@ -5,6 +5,7 @@ import Game, { BallzoneHeader } from '@/modules/ballzone';
 import Windows, { CollabioHeader } from '@/modules/collabio';
 import CustomMouse from '@/modules/customMouse';
 import Hero from '@/modules/hero';
+// import { ProjectsHeader } from '@/modules/projects';
 
 export default function HomePage() {
   return (

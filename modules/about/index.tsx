@@ -14,7 +14,7 @@ const AboutSkills = () => {
         onMouseEnter={setMouseVariant.text}
         onMouseLeave={setMouseVariant.default}
       >
-        Using the latest technologies, I develop fascinating things...
+        Using the latest technologies, I develop things like...
       </p>
 
       <Skills />

@@ -4,7 +4,18 @@ import { motion } from 'framer-motion';
 
 import { useScrollY } from '@/common/hooks/useScrollY';
 
-const ScrollOpacity = ({ children }: { children: ReactNode }) => {
+import { useWindowSize } from '../hooks/useWindowSize';
+
+const ScrollOpacity = ({
+  children,
+  center = false,
+  setStartScroll,
+}: {
+  children: ReactNode;
+  center?: boolean;
+  setStartScroll?: (startScroll: number) => void;
+}) => {
+  const { height } = useWindowSize();
   const scrollY = useScrollY();
 
   const startScroll = useRef(0);
@@ -19,12 +30,14 @@ const ScrollOpacity = ({ children }: { children: ReactNode }) => {
       style={{ opacity }}
       onViewportEnter={() => {
         if (startScroll.current === 0) {
-          startScroll.current = scrollY + 200;
+          startScroll.current = scrollY + (center ? height / 2 : 0) + 200;
+          if (setStartScroll) setStartScroll(startScroll.current);
         }
       }}
       onViewportLeave={() => {
         if (scrollY <= startScroll.current) {
           startScroll.current = 0;
+          if (setStartScroll) setStartScroll(startScroll.current);
         }
       }}
     >
