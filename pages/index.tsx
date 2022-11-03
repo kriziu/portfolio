@@ -25,11 +25,14 @@ export default function HomePage() {
           <About />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={3}>
+        <ParallaxLayer offset={3} className="pointer-events-none">
           <CollabioHeader />
         </ParallaxLayer>
 
-        <ParallaxLayer sticky={{ start: 3.5, end: 5 }}>
+        <ParallaxLayer
+          sticky={{ start: 3.5, end: 5 }}
+          className="pointer-events-none"
+        >
           <Windows windowLength={1.5} />
         </ParallaxLayer>
 
