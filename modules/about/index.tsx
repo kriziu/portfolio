@@ -9,6 +9,8 @@ const AboutSkills = () => {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
+      <Skills />
+
       <p
         className="header block px-8 text-center sm:px-16 lg:w-2/3 lg:px-0 2xl:w-[75rem]"
         onMouseEnter={setMouseVariant.text}
@@ -16,8 +18,6 @@ const AboutSkills = () => {
       >
         Using the latest technologies, I develop things like...
       </p>
-
-      <Skills />
     </div>
   );
 };

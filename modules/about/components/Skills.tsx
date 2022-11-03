@@ -22,7 +22,7 @@ const Skills = () => {
   const { setMouseVariant } = useMouseVariant();
 
   return (
-    <motion.div className="mt-12 flex w-full flex-wrap items-center justify-center gap-10 px-3 sm:mt-24 sm:w-4/5 sm:px-0 lg:gap-16 xl:w-3/5">
+    <motion.div className="mb-12 flex w-full flex-wrap items-center justify-center gap-10 px-3 sm:mb-24 sm:w-4/5 sm:px-0 lg:gap-16 xl:w-3/5">
       <Image
         src={typescriptSVG}
         alt="TypeScript"
