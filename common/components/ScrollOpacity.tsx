@@ -15,22 +15,26 @@ const ScrollOpacity = ({
   center?: boolean;
   setStartScroll?: (startScroll: number) => void;
 }) => {
-  const { height } = useWindowSize();
+  const { height, width } = useWindowSize();
   const scrollY = useScrollY();
 
   const startScroll = useRef(0);
 
-  const opacity =
-    startScroll.current === 0
-      ? 0
-      : Math.min(Math.max((scrollY - startScroll.current) / 300, 0), 1);
+  const mobile = width < 768;
+
+  let opacity = 0;
+
+  if (startScroll.current) {
+    opacity = Math.min(Math.max((scrollY - startScroll.current) / 300, 0), 1);
+  }
 
   return (
     <motion.div
       style={{ opacity }}
       onViewportEnter={() => {
         if (startScroll.current === 0) {
-          startScroll.current = scrollY + (center ? height / 2 : 0) + 200;
+          startScroll.current =
+            scrollY + (center ? height / 2 : 0) + (mobile ? 0 : 200);
           if (setStartScroll) setStartScroll(startScroll.current);
         }
       }}
