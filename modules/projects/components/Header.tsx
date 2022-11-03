@@ -21,7 +21,7 @@ const Header = () => {
           className="w-max text-center"
           onMouseEnter={setMouseVariant.text}
           onMouseLeave={setMouseVariant.default}
-          style={{ scale, fontSize: 'max(10vw, 12vh)' }}
+          style={{ scale, fontSize: 'max(10vw, 15vh)' }}
         >
           and more.
         </motion.p>
