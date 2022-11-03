@@ -23,7 +23,7 @@ const Header = () => {
           onMouseLeave={setMouseVariant.default}
           style={{ scale }}
         >
-          Lorem psium dolor sit amet
+          and even more.
         </motion.p>
       </ScrollOpacity>
     </div>
