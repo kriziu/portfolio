@@ -1,4 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import { motion } from 'framer-motion';
 
 import { useElementDimensions } from '@/common/hooks/useElementDimensions';
 import { useMouseVariant } from '@/modules/customMouse';
@@ -9,6 +11,8 @@ import { Ball } from '../types/ball.type';
 
 const Game = () => {
   const { setMouseVariant } = useMouseVariant();
+
+  const [run, setRun] = useState(false);
 
   const playerPosition = useRef({ x: 0, y: 0 });
   const ball = useRef<Ball>({
@@ -70,9 +74,9 @@ const Game = () => {
     const dpi = window.devicePixelRatio;
     const canvas = movablesRef.current;
 
-    const interval = setInterval(() => {
-      if (!canvas) return;
+    if (!canvas || !run) return () => {};
 
+    const interval = setInterval(() => {
       const newBall = handleBallPosition(ball.current, playerPosition.current, {
         ballSize,
         playerSize,
@@ -122,7 +126,7 @@ const Game = () => {
     }, 1000 / 64);
 
     return () => clearInterval(interval);
-  }, [ballSize, playerSize, goalHeight]);
+  }, [ballSize, playerSize, goalHeight, run]);
 
   const handleUserMove = ({ x, y }: { x: number; y: number }) => {
     const node = windowRef.current;
@@ -139,7 +143,11 @@ const Game = () => {
 
   return (
     <div className="flex h-full w-full items-center justify-center px-3">
-      <div className="relative flex h-[68vw] w-full flex-col items-center justify-center sm:h-[50vw] sm:w-3/4 md:h-[45vw] xl:h-[40vw] xl:w-2/3">
+      <motion.div
+        className="relative flex h-[68vw] w-full flex-col items-center justify-center sm:h-[50vw] sm:w-3/4 md:h-[45vw] xl:h-[40vw] xl:w-2/3"
+        onViewportEnter={() => setRun(true)}
+        onViewportLeave={() => setRun(false)}
+      >
         <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg bg-[#5A9D61]">
           <div className="relative flex h-10 w-full flex-row items-center justify-center bg-zinc-800">
             <div className="absolute left-5 flex h-full items-center gap-1 justify-self-start">
@@ -179,7 +187,7 @@ const Game = () => {
             />
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
