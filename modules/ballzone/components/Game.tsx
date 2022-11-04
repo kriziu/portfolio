@@ -149,7 +149,7 @@ const Game = () => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-4 px-3">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 px-6">
       <p className="text-zinc-400">
         {isMobile()
           ? '(try to move ball with your finger)'
