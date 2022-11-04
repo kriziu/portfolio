@@ -12,7 +12,7 @@ const Contact = () => {
       <ScrollOpacity>
         <div className="flex flex-col items-center justify-center">
           <h1
-            className="header"
+            className="header -mt-10 w-full px-10 text-center sm:mt-0"
             onMouseEnter={setMouseVariant.text}
             onMouseLeave={setMouseVariant.default}
             id="contact"
@@ -20,18 +20,17 @@ const Contact = () => {
             Let&apos;s work together.
           </h1>
 
+          <p className="mt-3 text-lg text-zinc-400 lg:mt-4 lg:text-xl">
+            dziecielskibruno@gmail.com
+          </p>
           <a
-            className="primary-gradient mt-5 cursor-none rounded-2xl p-2 px-4 text-lg lg:mt-10 lg:p-3 lg:px-6 lg:text-xl"
+            className="primary-gradient mt-4 cursor-none rounded-2xl p-2 px-4 text-lg lg:mt-6 lg:p-3 lg:px-6 lg:text-xl"
             onMouseEnter={setMouseVariant.button}
             onMouseLeave={setMouseVariant.default}
             href="mailto:dziecielskibruno@gmail.com"
           >
             Contact me
           </a>
-
-          <p className="mt-2 text-lg text-zinc-400 lg:mt-4 lg:text-xl">
-            dziecielskibruno@gmail.com
-          </p>
         </div>
       </ScrollOpacity>
 
