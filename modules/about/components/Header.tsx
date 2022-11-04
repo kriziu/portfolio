@@ -10,7 +10,7 @@ const AboutHeader = () => {
     <div className="flex h-full w-full items-center justify-center">
       <ScrollOpacity>
         <motion.h2
-          className="header h-min text-center"
+          className="header h-min px-5 text-center"
           onMouseEnter={setMouseVariant.text}
           onMouseLeave={setMouseVariant.default}
         >
