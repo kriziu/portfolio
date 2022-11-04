@@ -1,4 +1,10 @@
+import { useState } from 'react';
+
+import { motion } from 'framer-motion';
+
 import ScrollOpacity from '@/common/components/ScrollOpacity';
+import { useScrollY } from '@/common/hooks/useScrollY';
+import { useWindowSize } from '@/common/hooks/useWindowSize';
 import { useMouseVariant } from '@/modules/customMouse';
 
 import Project from './Project';
@@ -6,9 +12,19 @@ import Project from './Project';
 const ProjectsList = () => {
   const { setMouseVariant } = useMouseVariant();
 
+  const scrollY = useScrollY();
+  const { height, width } = useWindowSize();
+
+  const [startScroll, setStartScroll] = useState(0);
+
+  const slowDown = startScroll && scrollY - startScroll;
+
   return (
-    <div className="mt-36 flex h-full w-full items-start justify-center md:mt-0 md:items-center">
-      <ScrollOpacity>
+    <motion.div
+      className="mt-36 flex h-full w-full items-start justify-center md:mt-0 md:items-center"
+      style={{ y: width < 768 ? 0 : -height / 2 + slowDown / 2.3 }}
+    >
+      <ScrollOpacity setStartScroll={setStartScroll}>
         <div className="grid grid-cols-1 place-items-center gap-5 md:grid-cols-2 md:gap-10 xl:grid-cols-3">
           <Project
             title="kriziu/shoes-ecommerce"
@@ -63,7 +79,7 @@ const ProjectsList = () => {
           .
         </p>
       </ScrollOpacity>
-    </div>
+    </motion.div>
   );
 };
 

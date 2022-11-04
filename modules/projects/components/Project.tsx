@@ -15,7 +15,7 @@ const Project = ({ title, demo, description, github, scrollTo }: Props) => {
 
   return (
     <div
-      className="flex h-max w-72 flex-col rounded-3xl bg-[#1f1f1f] p-5 lg:h-[21rem] lg:w-96 lg:p-10"
+      className="flex h-max w-72 flex-col rounded-3xl bg-[#1f1f1f] p-5 md:h-64 lg:h-[21rem] lg:w-96 lg:p-10"
       id={scrollTo ? 'projects' : undefined}
     >
       <p className="text-lg lg:text-2xl">{title}</p>
