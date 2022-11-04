@@ -31,12 +31,12 @@ const ProjectsList = () => {
           />
           <Project
             title="gonciuu/scanningworld"
-            description="An app where users scan QR Codes in popular places and get points for it. The points can be used to get some coupons. My part was to create backend and admin dashboard."
+            description="An app where users scan QR Codes in popular places and get points that can be used to redeem some coupons. My part was to create backend and admin dashboard."
             github="https://github.com/gonciuu/scanningworld"
           />
           <Project
             title="kriziu/alcobusiness"
-            description="A party drinking game similar to Monopoly but with my own rules. The game is played on a map of the city and the players have to buy places to avoid drinking."
+            description="A party drinking game similar to Monopoly but with my own rules. Players moves around the board and have to buy places to avoid drinking."
             github="https://github.com/kriziu/alcobusiness"
             demo="https://alcobusiness.vercel.app/"
           />
