@@ -30,7 +30,7 @@ const Contact = () => {
               Contact me
             </a>
 
-            <p className="mt-2 text-lg text-zinc-500 lg:mt-4 lg:text-xl">
+            <p className="mt-2 text-lg text-zinc-400 lg:mt-4 lg:text-xl">
               dziecielskibruno@gmail.com
             </p>
           </div>
@@ -38,7 +38,7 @@ const Contact = () => {
       </div>
 
       <div className="h-36 w-full">
-        <div className="flex h-full w-full items-center justify-center gap-5 text-lg text-zinc-500 lg:text-xl">
+        <div className="flex h-full w-full items-center justify-center gap-5 text-lg text-zinc-400 lg:text-xl">
           <p>© 2022 Bruno Dzięcielski</p>
           <a
             onMouseEnter={setMouseVariant.button}
@@ -46,6 +46,7 @@ const Contact = () => {
             href="https://www.linkedin.com/in/bruno-dzi%C4%99cielski-1a0581211/"
             target="_blank"
             rel="noreferrer"
+            aria-label="LinkedIn"
           >
             <FaLinkedin />
           </a>
@@ -56,6 +57,7 @@ const Contact = () => {
             href="https://github.com/kriziu"
             target="_blank"
             rel="noreferrer"
+            aria-label="GitHub"
           >
             <FaGithub />
           </a>
