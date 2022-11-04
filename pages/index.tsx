@@ -5,14 +5,14 @@ import Game, { BallzoneHeader } from '@/modules/ballzone';
 import Windows, { CollabioHeader } from '@/modules/collabio';
 import CustomMouse from '@/modules/customMouse';
 import Hero from '@/modules/hero';
-import { ProjectsHeader } from '@/modules/projects';
+import ProjectsList, { ProjectsHeader } from '@/modules/projects';
 
 export default function HomePage() {
   return (
     <>
       <CustomMouse />
 
-      <Parallax pages={10} id="__parallax">
+      <Parallax pages={12} id="__parallax">
         <ParallaxLayer>
           <Hero />
         </ParallaxLayer>
@@ -40,12 +40,19 @@ export default function HomePage() {
           <BallzoneHeader />
         </ParallaxLayer>
 
-        <ParallaxLayer sticky={{ start: 6.3, end: 7.8 }}>
+        <ParallaxLayer
+          sticky={{ start: 6.3, end: 7.8 }}
+          className="pointer-events-none"
+        >
           <ProjectsHeader />
         </ParallaxLayer>
 
         <ParallaxLayer sticky={{ start: 6.3, end: 7 }}>
           <Game />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={8.4} factor={2.5}>
+          <ProjectsList />
         </ParallaxLayer>
       </Parallax>
     </>

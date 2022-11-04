@@ -27,7 +27,7 @@ const Header = () => {
     <div className="absolute z-50 flex h-full w-full flex-col items-center justify-center px-10">
       <ScrollOpacity center setStartScroll={setStartScroll}>
         <motion.p
-          className="w-max text-center"
+          className="pointer-events-auto w-max text-center"
           onMouseEnter={setMouseVariant.text}
           onMouseLeave={setMouseVariant.default}
           style={{ scale, fontSize: 'max(10vw, 15vh)', opacity }}
