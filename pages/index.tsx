@@ -3,6 +3,7 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import About, { AboutHeader } from '@/modules/about';
 import Game, { BallzoneHeader } from '@/modules/ballzone';
 import Windows, { CollabioHeader } from '@/modules/collabio';
+import Contact from '@/modules/contact';
 import CustomMouse from '@/modules/customMouse';
 import Hero from '@/modules/hero';
 import ProjectsList, { ProjectsHeader } from '@/modules/projects';
@@ -53,6 +54,10 @@ export default function HomePage() {
 
         <ParallaxLayer offset={8.4} factor={2.5}>
           <ProjectsList />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={11}>
+          <Contact />
         </ParallaxLayer>
       </Parallax>
     </>

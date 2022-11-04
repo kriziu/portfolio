@@ -15,6 +15,7 @@ const ProjectsList = () => {
             description="Exemplary shop made in Next.JS and Strapi CMS containing fake products from Nike."
             github="https://github.com/kriziu/shoes-ecommerce"
             demo="https://shoes-ecommerce.herokuapp.com/"
+            scrollTo
           />
           <Project
             title="kriziu/collabio"

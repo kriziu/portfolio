@@ -7,13 +7,17 @@ interface Props {
   description: string;
   github?: string;
   demo?: string;
+  scrollTo?: boolean;
 }
 
-const Project = ({ title, demo, description, github }: Props) => {
+const Project = ({ title, demo, description, github, scrollTo }: Props) => {
   const { setMouseVariant } = useMouseVariant();
 
   return (
-    <div className="flex h-max w-72 flex-col rounded-3xl bg-[#1f1f1f] p-5 lg:h-[21rem] lg:w-96 lg:p-10">
+    <div
+      className="flex h-max w-72 flex-col rounded-3xl bg-[#1f1f1f] p-5 lg:h-[21rem] lg:w-96 lg:p-10"
+      id={scrollTo ? 'projects' : undefined}
+    >
       <p className="text-lg lg:text-2xl">{title}</p>
 
       <div className="my-4 h-px w-full bg-zinc-500 lg:my-5" />
@@ -25,7 +29,7 @@ const Project = ({ title, demo, description, github }: Props) => {
       <div className="mt-3 flex gap-3 md:mt-0">
         {github && (
           <a
-            className="flex items-center justify-center gap-2 rounded-2xl bg-zinc-500 px-6 py-2 font-sans font-bold text-black"
+            className="flex cursor-none items-center justify-center gap-2 rounded-2xl bg-zinc-500 px-6 py-2 font-sans font-bold text-black"
             onMouseEnter={setMouseVariant.button}
             onMouseLeave={setMouseVariant.default}
             href={github}
@@ -39,7 +43,7 @@ const Project = ({ title, demo, description, github }: Props) => {
 
         {demo && (
           <a
-            className="flex items-center justify-center gap-2 rounded-2xl bg-zinc-500 px-6 py-2 font-sans font-bold text-black"
+            className="flex cursor-none items-center justify-center gap-2 rounded-2xl bg-zinc-500 px-6 py-2 font-sans font-bold text-black"
             onMouseEnter={setMouseVariant.button}
             onMouseLeave={setMouseVariant.default}
             href={demo}
