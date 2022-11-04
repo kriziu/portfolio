@@ -14,6 +14,7 @@ const Game = () => {
   const { setMouseVariant } = useMouseVariant();
 
   const [run, setRun] = useState(false);
+  const [scores, setScores] = useState<[number, number]>([0, 0]);
 
   const playerPosition = useRef({ x: 0, y: 0 });
   const ball = useRef<Ball>({
@@ -78,15 +79,20 @@ const Game = () => {
     if (!canvas || !run) return () => {};
 
     const interval = setInterval(() => {
-      const newBall = handleBallPosition(ball.current, playerPosition.current, {
-        ballSize,
-        playerSize,
-        boardSize: {
-          width: canvas.width / dpi,
-          height: canvas.height / dpi,
-        },
-        goalHeight,
-      });
+      const newBall = handleBallPosition(
+        ball.current,
+        playerPosition.current,
+        setScores,
+        {
+          ballSize,
+          playerSize,
+          boardSize: {
+            width: canvas.width / dpi,
+            height: canvas.height / dpi,
+          },
+          goalHeight,
+        }
+      );
       ball.current = newBall;
 
       const ctx = canvas.getContext('2d');
@@ -150,11 +156,11 @@ const Game = () => {
           : '(try to move ball with your finger)'}
       </p>
       <motion.div
-        className="relative flex h-[68vw] w-full flex-col items-center justify-center sm:h-[50vw] sm:w-3/4 md:h-[45vw] xl:h-[40vw] xl:w-2/3"
+        className="relative flex h-[75vw] w-full flex-col items-center justify-center sm:h-[55vw] sm:w-3/4 md:h-[50vw] xl:h-[40vw] xl:w-2/3"
         onViewportEnter={() => setRun(true)}
         onViewportLeave={() => setRun(false)}
       >
-        <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg bg-[#5A9D61]">
+        <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg ">
           <div className="relative flex h-10 w-full flex-row items-center justify-center bg-zinc-800">
             <div className="absolute left-5 flex h-full items-center gap-1 justify-self-start">
               <div className="h-3 w-3 rounded-full bg-red-500" />
@@ -167,8 +173,13 @@ const Game = () => {
             </div>
           </div>
 
+          <div className="flex w-full items-center justify-center gap-5 bg-black pt-1 text-2xl sm:text-3xl md:gap-14 lg:gap-24 lg:text-5xl">
+            <p className="w-10 text-center text-red-500">{scores[0]}</p>
+            <p className="w-10 text-center text-[#3b82f6]">{scores[1]}</p>
+          </div>
+
           <div
-            className="relative flex flex-1 touch-none items-center"
+            className="relative flex flex-1 touch-none items-center overflow-hidden rounded-lg bg-[#5A9D61]"
             ref={windowRef}
             onMouseMove={(e) => handleUserMove({ x: e.clientX, y: e.clientY })}
             onTouchMove={(e) =>

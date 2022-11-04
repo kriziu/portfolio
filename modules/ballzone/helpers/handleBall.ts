@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { Ball, Settings } from '../types/ball.type';
 import { makeBallPosition } from './makePosition';
 
@@ -11,6 +13,7 @@ const MOVE_BALL = {
 export const handleBallPosition = (
   ball: Ball,
   playerPosition: { x: number; y: number },
+  setScores: Dispatch<SetStateAction<[number, number]>>,
   settings: Settings
 ): Ball => {
   const { playerSize, ballSize, boardSize } = settings;
@@ -79,6 +82,12 @@ export const handleBallPosition = (
       settings
     );
   }
+
+  if (newPosition.x < playerSize)
+    setScores((scores) => [scores[0], scores[1] + 1]);
+
+  if (newPosition.x > boardSize.width - playerSize)
+    setScores((scores) => [scores[0] + 1, scores[1]]);
 
   if (
     newPosition.x < playerSize ||
