@@ -1,10 +1,15 @@
+import { RefObject } from 'react';
+
+import { IParallax } from '@react-spring/parallax';
+import { motion } from 'framer-motion';
+import { BsChevronUp } from 'react-icons/bs';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 import ScrollOpacity from '@/common/components/ScrollOpacity';
 
 import { useMouseVariant } from '../customMouse';
 
-const Contact = () => {
+const Contact = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
   const { setMouseVariant } = useMouseVariant();
 
   return (
@@ -33,6 +38,18 @@ const Contact = () => {
           </a>
         </div>
       </ScrollOpacity>
+
+      <motion.button
+        className="absolute bottom-20 flex flex-col items-center font-sans text-lg"
+        onMouseEnter={setMouseVariant.button}
+        onMouseLeave={setMouseVariant.default}
+        onClick={() => parallaxRef.current?.scrollTo(0)}
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      >
+        <BsChevronUp />
+        Back to top
+      </motion.button>
 
       <div className="absolute bottom-0 h-20 w-full">
         <div className="flex h-full w-full items-center justify-center gap-5 text-lg text-zinc-400 lg:text-xl">

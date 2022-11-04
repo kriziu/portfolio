@@ -1,4 +1,6 @@
-import { Parallax, ParallaxLayer } from '@react-spring/parallax';
+import { useRef } from 'react';
+
+import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
 
 import About, { AboutHeader } from '@/modules/about';
 import Game, { BallzoneHeader } from '@/modules/ballzone';
@@ -9,13 +11,15 @@ import Hero from '@/modules/hero';
 import ProjectsList, { ProjectsHeader } from '@/modules/projects';
 
 export default function HomePage() {
+  const parallaxRef = useRef<IParallax>(null);
+
   return (
     <>
       <CustomMouse />
 
-      <Parallax pages={12} id="__parallax">
+      <Parallax pages={12} id="__parallax" ref={parallaxRef}>
         <ParallaxLayer>
-          <Hero />
+          <Hero parallaxRef={parallaxRef} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1}>
@@ -57,7 +61,7 @@ export default function HomePage() {
         </ParallaxLayer>
 
         <ParallaxLayer offset={11}>
-          <Contact />
+          <Contact parallaxRef={parallaxRef} />
         </ParallaxLayer>
       </Parallax>
     </>
