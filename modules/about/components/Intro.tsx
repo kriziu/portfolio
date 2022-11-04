@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, Fragment } from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -47,9 +47,8 @@ const Intro = () => {
     >
       {textArr.map((char, index) => {
         return (
-          <>
+          <Fragment key={index}>
             <motion.span
-              key={index}
               animate={
                 progress >= progressPerWord * index + 1
                   ? { y: 0, opacity: 1 }
@@ -59,7 +58,7 @@ const Intro = () => {
             >
               {char}
             </motion.span>{' '}
-          </>
+          </Fragment>
         );
       })}
     </motion.p>
