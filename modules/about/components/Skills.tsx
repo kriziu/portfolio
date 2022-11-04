@@ -37,7 +37,6 @@ const SkillBadge = ({
         src={svg}
         alt={name}
         className={className || 'h-10 w-max md:h-12 lg:h-16'}
-        priority
         onMouseEnter={() => setMouseVariant.technology(name)}
         onMouseLeave={setMouseVariant.default}
       />
