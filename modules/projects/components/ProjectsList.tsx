@@ -64,8 +64,8 @@ const ProjectsList = () => {
           />
         </div>
 
-        <p className="mt-10 text-center text-2xl">
-          More projects on my{' '}
+        <p className="mt-10 px-10 text-center text-2xl">
+          For more projects checkout my{' '}
           <a
             className="text-gradient cursor-none"
             onMouseEnter={setMouseVariant.button}
