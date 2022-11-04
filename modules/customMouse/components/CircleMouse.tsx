@@ -79,6 +79,7 @@ const CircleMouse = () => {
 
   return (
     <motion.div
+      initial={{ x: -100, y: -100 }}
       variants={variants}
       animate={mouseVariant}
       className="primary-gradient pointer-events-none fixed top-0 left-0 z-50 flex h-8 w-8 items-center justify-center rounded-full text-center text-xl text-black"
