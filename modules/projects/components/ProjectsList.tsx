@@ -35,7 +35,9 @@ const ProjectsList = () => {
           />
           <Project
             title="kriziu/collabio"
-            description="Real-time collaborative whiteboard made using websockets."
+            description="A real-time collaborative whiteboard made using Next.js and socket.io.
+            Users can move on a board, draw lines, shapes, add images and
+            download a drawing."
             github="https://github.com/kriziu/collabio"
             demo="https://collabio-kriziu.herokuapp.com/"
           />
