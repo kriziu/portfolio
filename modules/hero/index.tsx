@@ -29,12 +29,14 @@ const Hero = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
         >
           Projects
         </button>
-        <button
+        <a
           onMouseEnter={setMouseVariant.button}
           onMouseLeave={setMouseVariant.default}
+          href="pdf/brunodziecielski.pdf"
+          target="_blank"
         >
           Resume
-        </button>
+        </a>
         <button
           onClick={() => parallaxRef.current?.scrollTo(11)}
           onMouseEnter={setMouseVariant.button}

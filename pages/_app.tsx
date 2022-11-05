@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Bruno Dzięcielski | Full stack Developer</title>
         <meta
           name="description"
-          content="Portoflio site of Full stack Developer Bruno Dzięcielski."
+          content="Portoflio site of Full stack Next.js Developer Bruno Dzięcielski."
         />
         <meta
           name="keywords"
