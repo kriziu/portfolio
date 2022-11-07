@@ -29,8 +29,8 @@ const CircleMouse = () => {
 
   const variants: Record<MouseVariant, {}> = {
     [MouseVariant.DEFAULT]: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
+      x: mousePosition.x,
+      y: mousePosition.y,
     },
     [MouseVariant.TEXT]: {
       height: 150,
@@ -84,7 +84,7 @@ const CircleMouse = () => {
       initial={{ x: -100, y: -100 }}
       variants={variants}
       animate={mouseVariant}
-      className="primary-gradient pointer-events-none fixed top-0 left-0 z-50 flex h-8 w-8 items-center justify-center rounded-full text-center text-xl text-black"
+      className="primary-gradient pointer-events-none fixed top-0 left-0 z-50 flex h-0 w-0 items-center justify-center rounded-full text-center text-xl text-black"
       transition={{ type: 'spring', stiffness: 2000, damping: 100 }}
     >
       {mouseVariant === MouseVariant.BUTTON && 'Click'}
