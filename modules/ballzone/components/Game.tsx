@@ -168,9 +168,14 @@ const Game = () => {
               <div className="h-3 w-3 rounded-full bg-green-500" />
             </div>
 
-            <div className="ml-10 flex h-6 w-1/2 items-center justify-center overflow-hidden truncate rounded-lg bg-zinc-700 text-sm text-zinc-300 md:ml-0">
+            <a
+              className="ml-10 flex h-6 w-1/2 items-center justify-center overflow-hidden truncate rounded-lg bg-zinc-700 text-sm text-zinc-300 hover:underline md:ml-0"
+              href="https://ballzone.herokuapp.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
               ballzone.herokuapp.com/room
-            </div>
+            </a>
           </div>
 
           <div className="flex w-full items-center justify-center gap-5 bg-black pt-1 text-2xl sm:text-3xl md:gap-14 lg:gap-24 lg:text-5xl">

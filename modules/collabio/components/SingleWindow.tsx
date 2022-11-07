@@ -97,9 +97,14 @@ const SingleWindow = ({
             <div className="h-3 w-3 rounded-full bg-green-500" />
           </div>
 
-          <div className="pointer-events-auto ml-10 flex h-6 w-1/2 items-center justify-center overflow-hidden truncate rounded-lg bg-zinc-700 text-sm text-zinc-300 md:ml-0">
+          <a
+            className="pointer-events-auto ml-10 flex h-6 w-1/2 items-center justify-center overflow-hidden truncate rounded-lg bg-zinc-700 text-sm text-zinc-300 hover:underline md:ml-0"
+            href="https://collabio-kriziu.herokuapp.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
             collabio-kriziu.herokuapp.com/room
-          </div>
+          </a>
         </div>
 
         <div
