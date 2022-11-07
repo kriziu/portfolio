@@ -41,17 +41,6 @@ const CircleMouse = () => {
 
       mixBlendMode: 'difference',
     },
-    [MouseVariant.BUTTON]: {
-      height: 80,
-      width: 80,
-
-      x: mousePosition.x - 40,
-      y: mousePosition.y - 40,
-
-      mixBlendMode: 'difference',
-      backgroundImage:
-        'linear-gradient(rgba(255,255,255, 1), rgba(255,255,255, 1))',
-    },
     [MouseVariant.TECHNOLOGY]: {
       height: 150,
       width: 150,
@@ -87,7 +76,6 @@ const CircleMouse = () => {
       className="primary-gradient pointer-events-none fixed top-0 left-0 z-50 flex h-0 w-0 items-center justify-center whitespace-nowrap rounded-full text-center text-xl text-black"
       transition={{ type: 'spring', stiffness: 2000, damping: 100 }}
     >
-      {mouseVariant === MouseVariant.BUTTON && 'Click'}
       {mouseVariant === MouseVariant.TECHNOLOGY && text}
     </motion.div>
   );

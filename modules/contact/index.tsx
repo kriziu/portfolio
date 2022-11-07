@@ -29,9 +29,7 @@ const Contact = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
             dziecielskibruno@gmail.com
           </p>
           <a
-            className="primary-gradient mt-4 cursor-none rounded-2xl p-2 px-4 text-lg lg:mt-6 lg:p-3 lg:px-6 lg:text-xl"
-            onMouseEnter={setMouseVariant.button}
-            onMouseLeave={setMouseVariant.default}
+            className="primary-gradient scale-btn hover:hover-gradient mt-4 rounded-2xl p-2 px-4 text-lg transition-all duration-300 lg:mt-6 lg:p-3 lg:px-6 lg:text-xl"
             href="mailto:dziecielskibruno@gmail.com"
           >
             Contact me
@@ -40,9 +38,7 @@ const Contact = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
       </ScrollOpacity>
 
       <motion.button
-        className="absolute bottom-20 flex flex-col items-center font-sans text-lg"
-        onMouseEnter={setMouseVariant.button}
-        onMouseLeave={setMouseVariant.default}
+        className="absolute bottom-20 flex flex-col items-center rounded-lg bg-transparent p-2 font-sans text-lg transition-colors hover:bg-zinc-800"
         onClick={() => parallaxRef.current?.scrollTo(0)}
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
@@ -55,23 +51,21 @@ const Contact = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
         <div className="flex h-full w-full items-center justify-center gap-5 text-lg text-zinc-400 lg:text-xl">
           <p>© 2022 Bruno Dzięcielski</p>
           <a
-            onMouseEnter={setMouseVariant.button}
-            onMouseLeave={setMouseVariant.default}
             href="https://www.linkedin.com/in/bruno-dzi%C4%99cielski-1a0581211/"
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
+            className="scale-btn"
           >
             <FaLinkedin />
           </a>
 
           <a
-            onMouseEnter={setMouseVariant.button}
-            onMouseLeave={setMouseVariant.default}
             href="https://github.com/kriziu"
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
+            className="scale-btn"
           >
             <FaGithub />
           </a>

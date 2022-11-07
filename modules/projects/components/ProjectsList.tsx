@@ -5,13 +5,10 @@ import { motion } from 'framer-motion';
 import ScrollOpacity from '@/common/components/ScrollOpacity';
 import { useScrollY } from '@/common/hooks/useScrollY';
 import { useWindowSize } from '@/common/hooks/useWindowSize';
-import { useMouseVariant } from '@/modules/customMouse';
 
 import Project from './Project';
 
 const ProjectsList = () => {
-  const { setMouseVariant } = useMouseVariant();
-
   const scrollY = useScrollY();
   const { height, width } = useWindowSize();
 
@@ -69,9 +66,7 @@ const ProjectsList = () => {
         <p className="mt-10 px-10 text-center text-2xl">
           For more projects checkout my{' '}
           <a
-            className="text-gradient cursor-none"
-            onMouseEnter={setMouseVariant.button}
-            onMouseLeave={setMouseVariant.default}
+            className="text-gradient hover:hover-gradient"
             href="https://github.com/kriziu"
             target="_blank"
             rel="noreferrer"

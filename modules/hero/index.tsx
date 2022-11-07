@@ -5,13 +5,11 @@ import { motion } from 'framer-motion';
 
 import { useWindowSize } from '@/common/hooks/useWindowSize';
 
-import { useMouseVariant } from '../customMouse';
 import Header from './components/Header';
 import ScrollIndicator from './components/ScrollIndicator';
 
 const Hero = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
   const { width } = useWindowSize();
-  const { setMouseVariant } = useMouseVariant();
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
@@ -24,14 +22,12 @@ const Hero = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
         <div className="h-px bg-zinc-600 sm:w-36 md:w-48 lg:w-72" />
         <button
           onClick={() => parallaxRef.current?.scrollTo(width < 768 ? 8.4 : 9)}
-          onMouseEnter={setMouseVariant.button}
-          onMouseLeave={setMouseVariant.default}
+          className="scale-btn"
         >
           Projects
         </button>
         <a
-          onMouseEnter={setMouseVariant.button}
-          onMouseLeave={setMouseVariant.default}
+          className="scale-btn"
           href="pdf/brunodziecielski.pdf"
           target="_blank"
         >
@@ -39,8 +35,7 @@ const Hero = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
         </a>
         <button
           onClick={() => parallaxRef.current?.scrollTo(11)}
-          onMouseEnter={setMouseVariant.button}
-          onMouseLeave={setMouseVariant.default}
+          className="scale-btn"
         >
           Contact
         </button>

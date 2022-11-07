@@ -9,7 +9,6 @@ export const useMouseVariant = () => {
   const setMouseVariant = {
     default: () => setVariant(MouseVariant.DEFAULT),
     text: () => setVariant(MouseVariant.TEXT),
-    button: () => setVariant(MouseVariant.BUTTON),
     technology: (newText: string) => {
       setVariant(MouseVariant.TECHNOLOGY);
       setText(newText);
