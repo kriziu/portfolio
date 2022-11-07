@@ -5,7 +5,7 @@ const Header = () => {
   const { setMouseVariant } = useMouseVariant();
 
   return (
-    <div className="-mb-12 flex w-screen flex-col items-center justify-center px-10 2xl:mb-0">
+    <div className="flex w-screen flex-col items-center justify-center px-10">
       <ScrollOpacity>
         <p
           className="header pointer-events-auto text-center"

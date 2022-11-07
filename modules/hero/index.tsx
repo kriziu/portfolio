@@ -5,7 +5,10 @@ import ScrollIndicator from './components/ScrollIndicator';
 
 const Hero = () => {
   return (
-    <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden">
+    <section
+      className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden"
+      id="hero"
+    >
       <motion.div
         className="absolute top-8 flex items-center gap-5 font-sans text-lg md:gap-10"
         initial={{ y: -20, opacity: 0 }}
@@ -42,7 +45,7 @@ const Hero = () => {
 
         <ScrollIndicator />
       </div>
-    </div>
+    </section>
   );
 };
 

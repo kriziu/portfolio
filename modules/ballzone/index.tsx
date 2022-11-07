@@ -3,11 +3,13 @@ import BallzoneHeader from './components/Header';
 
 const Ballzone = () => {
   return (
-    <div className="h-[140vh] lg:h-[180vh] 2xl:mt-36">
+    <section className="mt-24" id="ballzone">
       <BallzoneHeader />
 
-      <Game />
-    </div>
+      <div className="h-[140vh]">
+        <Game />
+      </div>
+    </section>
   );
 };
 

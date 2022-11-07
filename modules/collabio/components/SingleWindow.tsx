@@ -88,7 +88,7 @@ const SingleWindow = ({
   const { client1, client2 } = calcPos(progress, { width, height });
 
   return (
-    <div className="pointer-events-auto relative flex h-[50vw] w-full flex-col items-center justify-center sm:h-[40vw] sm:w-2/3 md:h-[25vw] xl:w-1/2  2xl:w-2/5">
+    <div className="pointer-events-auto relative flex h-[25vh] w-full flex-col items-center justify-center sm:h-[30vh] sm:w-2/3 xl:h-[25vw] xl:w-1/2  2xl:w-2/5">
       <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg bg-white">
         <div className="relative flex h-10 w-full flex-row items-center justify-center bg-zinc-800">
           <div className="absolute left-5 flex h-full items-center gap-1 justify-self-start">
