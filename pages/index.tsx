@@ -21,17 +21,11 @@ export default function HomePage() {
 
       <Ballzone />
 
-      {/*
-
-
-
-      <ProjectsHeader />
-
-
+      <div className="h-[20vh] md:h-[50vh]" />
 
       <ProjectsList />
 
-      <Contact /> */}
+      <Contact />
     </>
   );
 }
