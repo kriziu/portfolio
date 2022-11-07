@@ -1,6 +1,3 @@
-import { RefObject } from 'react';
-
-import { IParallax } from '@react-spring/parallax';
 import { motion } from 'framer-motion';
 import { BsChevronUp } from 'react-icons/bs';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
@@ -9,7 +6,7 @@ import ScrollOpacity from '@/common/components/ScrollOpacity';
 
 import { useMouseVariant } from '../customMouse';
 
-const Contact = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
+const Contact = () => {
   const { setMouseVariant } = useMouseVariant();
 
   return (
@@ -39,7 +36,7 @@ const Contact = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
 
       <motion.button
         className="absolute bottom-20 flex flex-col items-center rounded-lg bg-transparent p-2 font-sans text-lg transition-colors hover:bg-zinc-800"
-        onClick={() => parallaxRef.current?.scrollTo(0)}
+        // TODO: onClick={() => parallaxRef.current?.scrollTo(0)}
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >

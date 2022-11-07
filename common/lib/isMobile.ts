@@ -1,6 +1,10 @@
 /* eslint-disable */
 
 export const isMobile = () => {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
   let check = false;
   (function (a) {
     if (

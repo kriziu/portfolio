@@ -15,26 +15,28 @@ const Header = () => {
 
   const [startScroll, setStartScroll] = useState(0);
 
-  const scale = Math.max((scrollY - startScroll) / 5000 + 0.2);
+  // const scale = Math.max((scrollY - startScroll) / 5000 + 0.2);
 
   let opacity = 1;
 
-  if (scrollY > startScroll + height * 1.5) {
-    opacity = 0.9 - (scrollY - (startScroll + height * 1.5)) / 400;
-  }
+  // if (scrollY > startScroll + height * 1.5) {
+  //   opacity = 0.9 - (scrollY - (startScroll + height * 1.5)) / 400;
+  // }
 
   return (
-    <div className="absolute z-50 flex h-full w-full flex-col items-center justify-center px-10">
-      <ScrollOpacity center setStartScroll={setStartScroll}>
+    <div className="absolute h-[400vh]">
+      <div className="sticky top-0 z-10 flex h-screen w-screen flex-col items-center justify-center overflow-x-hidden px-10">
+        {/* <ScrollOpacity center setStartScroll={setStartScroll}> */}
         <motion.p
           className="pointer-events-auto w-max whitespace-nowrap text-center"
           onMouseEnter={setMouseVariant.text}
           onMouseLeave={setMouseVariant.default}
-          style={{ scale, fontSize: 'max(10vw, 15vh)', opacity }}
+          style={{ scale: 1, fontSize: 'max(10vw, 15vh)', opacity }}
         >
           and more.
         </motion.p>
-      </ScrollOpacity>
+        {/* </ScrollOpacity> */}
+      </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const AboutHeader = () => {
   const { setMouseVariant } = useMouseVariant();
 
   return (
-    <div className="flex h-full w-full items-center justify-center">
+    <div className="flex h-[60vh] w-screen items-center justify-center xl:h-screen">
       <ScrollOpacity>
         <motion.h2
           className="header h-min px-5 text-center"

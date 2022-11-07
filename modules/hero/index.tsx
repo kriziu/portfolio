@@ -1,18 +1,11 @@
-import { RefObject } from 'react';
-
-import { IParallax } from '@react-spring/parallax';
 import { motion } from 'framer-motion';
-
-import { useWindowSize } from '@/common/hooks/useWindowSize';
 
 import Header from './components/Header';
 import ScrollIndicator from './components/ScrollIndicator';
 
-const Hero = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
-  const { width } = useWindowSize();
-
+const Hero = () => {
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
+    <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden">
       <motion.div
         className="absolute top-8 flex items-center gap-5 font-sans text-lg md:gap-10"
         initial={{ y: -20, opacity: 0 }}
@@ -21,7 +14,7 @@ const Hero = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
       >
         <div className="h-px bg-zinc-600 sm:w-36 md:w-48 lg:w-72" />
         <button
-          onClick={() => parallaxRef.current?.scrollTo(width < 768 ? 8.4 : 9)}
+          // TODO: onClick={() => parallaxRef.current?.scrollTo(width < 768 ? 8.4 : 9)}
           className="scale-btn"
         >
           Projects
@@ -34,7 +27,7 @@ const Hero = ({ parallaxRef }: { parallaxRef: RefObject<IParallax> }) => {
           Resume
         </a>
         <button
-          onClick={() => parallaxRef.current?.scrollTo(11)}
+          // TODO: onClick={() => parallaxRef.current?.scrollTo(11)}
           className="scale-btn"
         >
           Contact
