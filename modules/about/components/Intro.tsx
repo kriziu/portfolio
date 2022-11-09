@@ -23,7 +23,7 @@ const Intro = () => {
     (Math.round(
       Math.min(
         100,
-        Math.max(0, ((scrollY - startScroll.current) / (height / 2.5)) * 100)
+        Math.max(0, ((scrollY - startScroll.current) / (height / 3)) * 100)
       )
     ) *
       100) /

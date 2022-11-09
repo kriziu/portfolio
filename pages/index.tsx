@@ -1,69 +1,41 @@
-import { useRef } from 'react';
+import { useEffect } from 'react';
 
-import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
-
-import About, { AboutHeader } from '@/modules/about';
-import Game, { BallzoneHeader } from '@/modules/ballzone';
-import Windows, { CollabioHeader } from '@/modules/collabio';
+import About from '@/modules/about';
+import Ballzone from '@/modules/ballzone';
+import Collabio from '@/modules/collabio';
 import Contact from '@/modules/contact';
 import CustomMouse from '@/modules/customMouse';
 import Hero from '@/modules/hero';
 import ProjectsList, { ProjectsHeader } from '@/modules/projects';
 
 export default function HomePage() {
-  const parallaxRef = useRef<IParallax>(null);
+  useEffect(() => {
+    const scrollTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    window.onunload = scrollTop;
+  }, []);
 
   return (
     <>
       <CustomMouse />
 
-      <Parallax pages={12} id="__parallax" ref={parallaxRef}>
-        <ParallaxLayer>
-          <Hero parallaxRef={parallaxRef} />
-        </ParallaxLayer>
+      <Hero />
 
-        <ParallaxLayer offset={1}>
-          <AboutHeader />
-        </ParallaxLayer>
+      <About />
 
-        <ParallaxLayer offset={2}>
-          <About />
-        </ParallaxLayer>
+      <Collabio />
 
-        <ParallaxLayer offset={3} className="pointer-events-none">
-          <CollabioHeader />
-        </ParallaxLayer>
+      <ProjectsHeader />
 
-        <ParallaxLayer
-          sticky={{ start: 3.5, end: 5 }}
-          className="pointer-events-none"
-        >
-          <Windows windowLength={1.5} />
-        </ParallaxLayer>
+      <Ballzone />
 
-        <ParallaxLayer offset={5.8}>
-          <BallzoneHeader />
-        </ParallaxLayer>
+      <div className="h-[20vh] md:h-[50vh]" />
 
-        <ParallaxLayer
-          sticky={{ start: 6.3, end: 7.8 }}
-          className="pointer-events-none"
-        >
-          <ProjectsHeader />
-        </ParallaxLayer>
+      <ProjectsList />
 
-        <ParallaxLayer sticky={{ start: 6.3, end: 7 }}>
-          <Game />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={8.4} factor={2.5}>
-          <ProjectsList />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={11}>
-          <Contact parallaxRef={parallaxRef} />
-        </ParallaxLayer>
-      </Parallax>
+      <Contact />
     </>
   );
 }

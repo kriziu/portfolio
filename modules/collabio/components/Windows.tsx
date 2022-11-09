@@ -34,7 +34,7 @@ const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
 
   return (
     <motion.div
-      className="flex h-full w-full flex-col items-center justify-center gap-4 py-24 px-10"
+      className="sticky top-0 flex h-screen w-screen flex-col items-center justify-center gap-4 py-24 px-10"
       onViewportEnter={() => {
         if (startScroll.current === 0) {
           startScroll.current = scrollY + height;
