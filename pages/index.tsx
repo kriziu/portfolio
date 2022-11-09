@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import About from '@/modules/about';
 import Ballzone from '@/modules/ballzone';
 import Collabio from '@/modules/collabio';
@@ -7,6 +9,14 @@ import Hero from '@/modules/hero';
 import ProjectsList, { ProjectsHeader } from '@/modules/projects';
 
 export default function HomePage() {
+  useEffect(() => {
+    const scrollTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    window.onunload = scrollTop;
+  }, []);
+
   return (
     <>
       <CustomMouse />
