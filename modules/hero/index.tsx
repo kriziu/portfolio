@@ -17,7 +17,11 @@ const Hero = () => {
       >
         <div className="h-px bg-zinc-600 sm:w-36 md:w-48 lg:w-72" />
         <button
-          // TODO: onClick={() => parallaxRef.current?.scrollTo(width < 768 ? 8.4 : 9)}
+          onClick={() =>
+            document
+              .getElementById('projects')
+              ?.scrollIntoView({ behavior: 'smooth' })
+          }
           className="scale-btn"
         >
           Projects
@@ -30,7 +34,11 @@ const Hero = () => {
           Resume
         </a>
         <button
-          // TODO: onClick={() => parallaxRef.current?.scrollTo(11)}
+          onClick={() =>
+            document
+              .getElementById('contact')
+              ?.scrollIntoView({ behavior: 'smooth' })
+          }
           className="scale-btn"
         >
           Contact

@@ -37,7 +37,11 @@ const Contact = () => {
 
         <motion.button
           className="absolute bottom-20 flex flex-col items-center rounded-lg bg-transparent p-2 font-sans text-lg transition-colors hover:bg-zinc-800"
-          // TODO: onClick={() => parallaxRef.current?.scrollTo(0)}
+          onClick={() =>
+            document
+              .getElementById('hero')
+              ?.scrollIntoView({ behavior: 'smooth' })
+          }
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
