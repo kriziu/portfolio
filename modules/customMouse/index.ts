@@ -1,8 +1,8 @@
 import CircleMouse from './components/CircleMouse';
-import MouseVariantProvider, { mouseContext } from './context/mouseContext';
 import { useMouseVariant } from './hooks/useMouseVariant';
-import { MouseVariant } from './types/mouse.type';
+import { useMouseStore } from './store/mouseStore';
+import { MouseVariant } from './types/mouse.types';
 
 export default CircleMouse;
 
-export { useMouseVariant, MouseVariantProvider, mouseContext, MouseVariant };
+export { useMouseVariant, MouseVariant, useMouseStore };

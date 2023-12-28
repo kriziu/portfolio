@@ -8,7 +8,7 @@ export const useScrollY = () => {
   const { scrollY } = useScroll();
 
   useEffect(() => {
-    const unsubscribe = scrollY.onChange(setScrolled);
+    const unsubscribe = scrollY.on('change', setScrolled);
 
     return unsubscribe;
   }, [scrollY]);

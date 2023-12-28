@@ -5,7 +5,7 @@ export type Ball = {
 
 export type Settings = {
   ballSize: number;
-  playerSize: number;
+  goalWidth: number;
   boardSize: { width: number; height: number };
   goalHeight: number;
 };

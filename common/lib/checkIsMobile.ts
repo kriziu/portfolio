@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-export const isMobile = () => {
+export const checkIsMobile = () => {
   if (typeof window === 'undefined') {
     return false;
   }

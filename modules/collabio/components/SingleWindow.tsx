@@ -1,38 +1,38 @@
 import { useEffect, useRef, useState } from 'react';
 
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 import { BsCursorFill } from 'react-icons/bs';
 
 import { useElementDimensions } from '@/common/hooks/useElementDimensions';
 import { useMouseVariant } from '@/modules/customMouse';
 
-import { calcPos } from '../helpers/calcPos';
+import { calculateClientsPositions } from '../helpers/calculateClientsPositions';
 import { drawLines } from '../helpers/drawLines';
 import { drawPath } from '../helpers/drawPath';
-import { Draw } from '../helpers/handleDraw';
+import {
+  handleDraw,
+  handleDrawEnd,
+  handleDrawStart,
+} from '../helpers/handleDraw';
 
-interface Props {
-  second?: boolean;
+interface SingleWindowProps {
+  isSecond?: boolean;
   progress: number;
-  mousePosition: { x: number; y: number };
-  setMousePosition: (mousePosition: { x: number; y: number }) => void;
   userMoves: { x: number; y: number }[][];
   addUserMove: (userMoves: { x: number; y: number }[]) => void;
   setCtx: (ctx: CanvasRenderingContext2D) => void;
   oppositeCtx: CanvasRenderingContext2D | undefined;
 }
 
-const SingleWindow = ({
-  second = false,
+export default function SingleWindow({
+  isSecond = false,
   progress,
-  mousePosition,
-  setMousePosition,
   userMoves,
   addUserMove,
   setCtx,
   oppositeCtx,
-}: Props) => {
+}: SingleWindowProps) {
   const { setMouseVariant } = useMouseVariant();
 
   const [isDrawing, setIsDrawing] = useState(false);
@@ -40,11 +40,15 @@ const SingleWindow = ({
   const windowRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const mouse = {
+    x: useMotionValue(0),
+    y: useMotionValue(0),
+  };
+
   const { width, height } = useElementDimensions(windowRef);
 
   useEffect(() => {
     const ctx = canvasRef.current?.getContext('2d');
-
     if (ctx) setCtx(ctx);
   }, [setCtx]);
 
@@ -68,7 +72,10 @@ const SingleWindow = ({
         const moves2: { x: number; y: number }[] = [];
 
         for (let i = 0.5; i <= progress; i += 0.5) {
-          const { client1, client2 } = calcPos(i, { width, height });
+          const { client1, client2 } = calculateClientsPositions(i, {
+            width,
+            height,
+          });
 
           if (i >= 50) moves1.push(client1);
           if (i <= 50) moves2.push(client2);
@@ -85,7 +92,10 @@ const SingleWindow = ({
     }
   }, [width, height, progress, userMoves]);
 
-  const { client1, client2 } = calcPos(progress, { width, height });
+  const { client1, client2 } = calculateClientsPositions(progress, {
+    width,
+    height,
+  });
 
   return (
     <div className="pointer-events-auto relative flex h-[25vh] w-full flex-col items-center justify-center sm:h-[30vh] sm:w-2/3 xl:h-[25vw] xl:w-1/2  2xl:w-2/5">
@@ -118,74 +128,75 @@ const SingleWindow = ({
               const x = e.clientX - rect.left;
               const y = e.clientY - rect.top;
 
-              setMousePosition({ x, y });
+              mouse.x.set(x);
+              mouse.y.set(y);
             }
 
             if (isDrawing && oppositeCtx) {
-              Draw.handleDraw(e, canvasRef.current, oppositeCtx);
+              handleDraw(e, canvasRef.current, oppositeCtx);
             }
           }}
           onMouseDown={(e) => {
             setIsDrawing(true);
-            Draw.handleDrawStart(canvasRef.current);
+            handleDrawStart(canvasRef.current);
             if (oppositeCtx) {
-              Draw.handleDraw(e, canvasRef.current, oppositeCtx);
+              handleDraw(e, canvasRef.current, oppositeCtx);
             }
           }}
           onMouseUp={() => {
             setIsDrawing(false);
-            Draw.handleDrawEnd(addUserMove);
+            handleDrawEnd(addUserMove);
           }}
           onTouchStart={(e) => {
             setIsDrawing(true);
-            Draw.handleDrawStart(canvasRef.current);
+            handleDrawStart(canvasRef.current);
             if (oppositeCtx) {
-              Draw.handleDraw(e.touches[0], canvasRef.current, oppositeCtx);
+              handleDraw(e.touches[0], canvasRef.current, oppositeCtx);
             }
           }}
           onTouchMove={(e) => {
             if (isDrawing && oppositeCtx) {
-              Draw.handleDraw(e.touches[0], canvasRef.current, oppositeCtx);
+              handleDraw(e.touches[0], canvasRef.current, oppositeCtx);
             }
           }}
           onTouchEnd={() => {
             setIsDrawing(false);
-            Draw.handleDrawEnd(addUserMove);
+            handleDrawEnd(addUserMove);
           }}
         >
           <motion.div
-            style={{ ...mousePosition }}
-            className="absolute top-0 left-0 z-10 lg:text-xl "
+            style={{ ...mouse }}
+            className="absolute left-0 top-0 z-10 lg:text-xl "
           >
             <BsCursorFill className="-rotate-90 fill-yellow-500" />
           </motion.div>
 
           <canvas
             ref={canvasRef}
-            className="absolute top-0 left-0"
+            className="absolute left-0 top-0"
             style={{ width, height }}
           />
           <div className="z-10 ml-3 h-2/3 w-6 rounded-lg bg-zinc-900" />
           <motion.div
-            className="absolute top-0 left-0 lg:text-xl"
+            className="absolute left-0 top-0 lg:text-xl"
             style={client2}
           >
             <BsCursorFill
               className={clsx('-rotate-90', {
-                'fill-blue-500': !second,
-                'fill-black': second,
+                'fill-blue-500': !isSecond,
+                'fill-black': isSecond,
               })}
             />
           </motion.div>
 
           <motion.div
-            className="absolute top-0 left-0 lg:text-xl"
+            className="absolute left-0 top-0 lg:text-xl"
             style={client1}
           >
             <BsCursorFill
               className={clsx('-rotate-90', {
-                'fill-red-500': second,
-                'fill-black': !second,
+                'fill-red-500': isSecond,
+                'fill-black': !isSecond,
               })}
             />
           </motion.div>
@@ -193,15 +204,13 @@ const SingleWindow = ({
       </div>
 
       <div
-        className={clsx('absolute my-2 h-max rounded-lg py-3 px-6', {
-          'top-full bg-blue-500/50 text-blue-300': second,
-          'bottom-full bg-red-500/50 text-red-300 xl:top-full': !second,
+        className={clsx('absolute my-2 h-max rounded-lg px-6 py-3', {
+          'top-full bg-blue-500/50 text-blue-300': isSecond,
+          'bottom-full bg-red-500/50 text-red-300 xl:top-full': !isSecond,
         })}
       >
-        Client {second ? '2' : '1'}
+        Client {isSecond ? '2' : '1'}
       </div>
     </div>
   );
-};
-
-export default SingleWindow;
+}

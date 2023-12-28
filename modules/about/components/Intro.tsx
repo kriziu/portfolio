@@ -6,28 +6,18 @@ import { useScrollY } from '@/common/hooks/useScrollY';
 import { useWindowSize } from '@/common/hooks/useWindowSize';
 import { useMouseVariant } from '@/modules/customMouse';
 
-const text = 'Using the latest technologies, I develop things like...';
-const textArr = text.split(' ');
-const progressPerWord = 100 / textArr.length;
+const TEXT = 'Using the latest technologies, I develop things like...';
+const TEXT_ARR = TEXT.split(' ');
+const PROGRESS_PER_WORD = 100 / TEXT_ARR.length;
 
-const Intro = () => {
+export default function Intro() {
   const { setMouseVariant } = useMouseVariant();
   const scrollY = useScrollY();
-
   const { height } = useWindowSize();
 
   const startScroll = useRef(0);
 
-  const progress =
-    startScroll.current &&
-    (Math.round(
-      Math.min(
-        100,
-        Math.max(0, ((scrollY - startScroll.current) / (height / 3)) * 100)
-      )
-    ) *
-      100) /
-      100;
+  const progress = calculateProgress(startScroll.current, scrollY, height);
 
   return (
     <motion.p
@@ -45,12 +35,12 @@ const Intro = () => {
         }
       }}
     >
-      {textArr.map((char, index) => {
+      {TEXT_ARR.map((char, index) => {
         return (
           <Fragment key={index}>
             <motion.span
               animate={
-                progress >= progressPerWord * index + 1
+                progress >= PROGRESS_PER_WORD * index + 1
                   ? { y: 0, opacity: 1 }
                   : { y: 20, opacity: 0 }
               }
@@ -63,6 +53,16 @@ const Intro = () => {
       })}
     </motion.p>
   );
-};
+}
 
-export default Intro;
+const calculateProgress = (
+  startScroll: number,
+  scrollY: number,
+  height: number
+) =>
+  startScroll &&
+  (Math.round(
+    Math.min(100, Math.max(0, ((scrollY - startScroll) / (height / 3)) * 100))
+  ) *
+    100) /
+    100;

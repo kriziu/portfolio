@@ -37,11 +37,7 @@ const Contact = () => {
 
         <motion.button
           className="absolute bottom-20 flex flex-col items-center rounded-lg bg-transparent p-2 font-sans text-lg transition-colors hover:bg-zinc-800"
-          onClick={() =>
-            document
-              .getElementById('hero')
-              ?.scrollIntoView({ behavior: 'smooth' })
-          }
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
@@ -51,7 +47,7 @@ const Contact = () => {
 
         <div className="absolute bottom-0 h-20 w-full">
           <div className="flex h-full w-full items-center justify-center gap-5 text-lg text-zinc-400 lg:text-xl">
-            <p>© 2022 Bruno Dzięcielski</p>
+            <p>© {getCopyrightYear()} Bruno Dzięcielski</p>
             <a
               href="https://www.linkedin.com/in/bruno-dzi%C4%99cielski-1a0581211/"
               target="_blank"
@@ -79,3 +75,10 @@ const Contact = () => {
 };
 
 export default Contact;
+
+const getCopyrightYear = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+
+  return year;
+};
