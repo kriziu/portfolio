@@ -5,6 +5,7 @@
     "next/core-web-vitals",
     "plugin:prettier/recommended"
   ],
+  "root": true,
   "rules": {
     "prettier/prettier": [
       "error",
@@ -29,6 +30,9 @@
         "project": "./tsconfig.json"
       },
       "rules": {
+        "no-param-reassign": "off",
+        "consistent-return": "off",
+        "@typescript-eslint/no-use-before-define": "off",
         "prettier/prettier": [
           "error",
           {

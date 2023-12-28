@@ -1,16 +1,13 @@
 import Game from './components/Game';
 import BallzoneHeader from './components/Header';
 
-const Ballzone = () => {
+export default function Ballzone() {
   return (
-    <section className="mt-24" id="ballzone">
+    <section id="ballzone">
       <BallzoneHeader />
-
       <div className="h-[140vh]">
         <Game />
       </div>
     </section>
   );
-};
-
-export default Ballzone;
+}

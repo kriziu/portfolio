@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import ScrollOpacity from '@/common/components/ScrollOpacity';
 import { useMouseVariant } from '@/modules/customMouse';
 
-const AboutHeader = () => {
+export default function AboutHeader() {
   const { setMouseVariant } = useMouseVariant();
 
   return (
@@ -20,6 +20,4 @@ const AboutHeader = () => {
       </motion.h2>
     </ScrollOpacity>
   );
-};
-
-export default AboutHeader;
+}

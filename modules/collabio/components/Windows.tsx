@@ -7,34 +7,31 @@ import { useWindowSize } from '@/common/hooks/useWindowSize';
 
 import SingleWindow from './SingleWindow';
 
-const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
+export default function Windows({
+  windowLength = 1,
+}: {
+  windowLength?: number;
+}) {
   const { height } = useWindowSize();
   const scrollY = useScrollY();
 
   const [client1Ctx, setClient1Ctx] = useState<CanvasRenderingContext2D>();
   const [client2Ctx, setClient2Ctx] = useState<CanvasRenderingContext2D>();
 
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [userMoves, setUserMoves] = useState<{ x: number; y: number }[][]>([]);
 
   const startScroll = useRef(0);
 
-  const progress =
-    startScroll.current &&
-    Math.round(
-      Math.min(
-        100,
-        Math.max(
-          0,
-          ((scrollY - startScroll.current) / (windowLength * height - 100)) *
-            100
-        )
-      ) * 100
-    ) / 100;
+  const progress = calculateProgress(
+    startScroll.current,
+    scrollY,
+    height,
+    windowLength
+  );
 
   return (
     <motion.div
-      className="sticky top-0 flex h-screen w-screen flex-col items-center justify-center gap-4 py-24 px-10"
+      className="sticky top-0 flex h-screen w-screen flex-col items-center justify-center gap-4 px-10 py-24"
       onViewportEnter={() => {
         if (startScroll.current === 0) {
           startScroll.current = scrollY + height;
@@ -52,18 +49,14 @@ const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
       <div className="flex w-full flex-col items-center justify-center gap-10 xl:flex-row">
         <SingleWindow
           progress={progress}
-          mousePosition={mousePosition}
-          setMousePosition={setMousePosition}
           userMoves={userMoves}
           addUserMove={(move) => setUserMoves([...userMoves, move])}
           setCtx={setClient1Ctx}
           oppositeCtx={client2Ctx}
         />
         <SingleWindow
-          second
+          isSecond
           progress={progress}
-          mousePosition={mousePosition}
-          setMousePosition={setMousePosition}
           userMoves={userMoves}
           addUserMove={(move) => setUserMoves([...userMoves, move])}
           setCtx={setClient2Ctx}
@@ -72,6 +65,21 @@ const Windows = ({ windowLength = 1 }: { windowLength?: number }) => {
       </div>
     </motion.div>
   );
-};
+}
 
-export default Windows;
+const calculateProgress = (
+  startScroll: number,
+  scrollY: number,
+  height: number,
+  windowLength: number
+) =>
+  startScroll &&
+  Math.round(
+    Math.min(
+      100,
+      Math.max(
+        0,
+        ((scrollY - startScroll) / (windowLength * height - 100)) * 100
+      )
+    ) * 100
+  ) / 100;

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Header from './components/Header';
 import ScrollIndicator from './components/ScrollIndicator';
 
-const Hero = () => {
+export default function Hero() {
   return (
     <section
       className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden"
@@ -55,6 +55,4 @@ const Hero = () => {
       </div>
     </section>
   );
-};
-
-export default Hero;
+}

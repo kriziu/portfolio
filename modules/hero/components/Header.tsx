@@ -4,7 +4,7 @@ import { useMouseVariant } from '@/modules/customMouse';
 
 import { wordAnimation } from '../animations/headerAnimation';
 
-const Header = () => {
+export default function Header() {
   const { setMouseVariant } = useMouseVariant();
 
   return (
@@ -33,6 +33,4 @@ const Header = () => {
       <motion.span variants={wordAnimation}>way.</motion.span>
     </motion.h1>
   );
-};
-
-export default Header;
+}

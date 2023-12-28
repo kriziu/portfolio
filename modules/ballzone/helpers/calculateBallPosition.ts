@@ -1,13 +1,14 @@
-import { Settings } from '../types/ball.type';
+import { Settings } from '../types/ball.types';
 
 const LINE_WIDTH = 2;
+const OPPOSITE_MULTIPLIER = -0.85;
 
-export const makeBallPosition = (
+export const calculateBallPosition = (
   x: number,
   y: number,
-  { playerSize, ballSize, boardSize, goalHeight }: Settings
+  { goalWidth, ballSize, boardSize, goalHeight }: Settings
 ) => {
-  const moveAreaSize = playerSize * 2;
+  const moveAreaSize = goalWidth * 2;
   let areaToBlock = moveAreaSize;
 
   if (
@@ -36,8 +37,8 @@ export const makeBallPosition = (
   newY = Math.max(Math.min(y, minY), maxY);
 
   const multiplier = { x: 1, y: 1 };
-  if (newX === maxX || newX === minX) multiplier.x = -0.85;
-  if (newY === maxY || newY === minY) multiplier.y = -0.85;
+  if (newX === maxX || newX === minX) multiplier.x = OPPOSITE_MULTIPLIER;
+  if (newY === maxY || newY === minY) multiplier.y = OPPOSITE_MULTIPLIER;
 
   return [
     {

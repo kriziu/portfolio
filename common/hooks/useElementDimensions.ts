@@ -4,6 +4,9 @@ export const useElementDimensions = (ref: RefObject<HTMLElement>) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
     const resizeObserver = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
         setDimensions({
@@ -13,16 +16,10 @@ export const useElementDimensions = (ref: RefObject<HTMLElement>) => {
       });
     });
 
-    const node = ref.current;
-
-    if (node) {
-      resizeObserver.observe(node);
-    }
+    resizeObserver.observe(node);
 
     return () => {
-      if (node) {
-        resizeObserver.unobserve(node);
-      }
+      resizeObserver.unobserve(node);
     };
   }, [ref]);
 

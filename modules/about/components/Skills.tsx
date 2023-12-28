@@ -16,21 +16,22 @@ import tailwindSVG from '@/public/svg/tailwindcss.svg';
 import typescriptSVG from '@/public/svg/typescript.svg';
 import webRTCSVG from '@/public/svg/webrtc.svg';
 
-const SkillBadge = ({
-  svg,
-  name,
-  className,
-}: {
+interface SkillBadgeProps {
   svg: StaticImageData;
   name: string;
   className?: string;
-}) => {
+}
+
+function SkillBadge({ svg, name, className }: SkillBadgeProps) {
   const { setMouseVariant } = useMouseVariant();
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 5 }}
       whileInView={{ opacity: 1, y: 0 }}
+      viewport={{
+        amount: 'all',
+      }}
       transition={{ duration: 0.3 }}
     >
       <Image
@@ -43,9 +44,9 @@ const SkillBadge = ({
       />
     </motion.div>
   );
-};
+}
 
-const Skills = () => {
+export default function Skills() {
   return (
     <div className="mb-12 flex w-full flex-wrap items-center justify-center gap-10 px-5 sm:mb-24 sm:w-4/5 sm:px-0 lg:gap-16 xl:w-3/5">
       <SkillBadge svg={typescriptSVG} name="TypeScript" />
@@ -67,6 +68,4 @@ const Skills = () => {
       <SkillBadge svg={webRTCSVG} name="WebRTC" className="h-7 w-max lg:h-10" />
     </div>
   );
-};
-
-export default Skills;
+}

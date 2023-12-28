@@ -1,20 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
 import { useElementDimensions } from '@/common/hooks/useElementDimensions';
-// import { isMobile } from '@/common/lib/isMobile';
+import { checkIsMobile } from '@/common/lib/checkIsMobile';
 import { useMouseVariant } from '@/modules/customMouse';
 
-import { handleBallPosition } from '../helpers/handleBall';
-import { renderBoard } from '../helpers/renderBoard';
-import { Ball } from '../types/ball.type';
+import { STRIPS_COLOR } from '../helpers/renderBoard';
+import { useGameLoop } from '../hooks/useGameLoop';
+import { useRenderBoard } from '../hooks/useRenderBoard';
+import { useSetupMovables } from '../hooks/useSetupMovables';
+import { Ball } from '../types/ball.types';
 
-const Game = () => {
+export default function Game() {
   const { setMouseVariant } = useMouseVariant();
-
-  const [run, setRun] = useState(false);
-  const [scores, setScores] = useState<[number, number]>([0, 0]);
 
   const playerPosition = useRef({ x: 0, y: 0 });
   const ball = useRef<Ball>({
@@ -26,114 +25,52 @@ const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const movablesRef = useRef<HTMLCanvasElement>(null);
 
+  //! Workaround for server hydration
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(checkIsMobile());
+  }, []);
+
   const { width, height } = useElementDimensions(windowRef);
 
-  const small = width < 700;
-  const lineWidth = small ? 2 : 4;
-  const playerSize = small ? 12 : 18;
-  const ballSize = small ? 9 : 14;
-  const goalHeight = height / 5;
+  const { isSmall, lineWidth, playerSize, ballSize, goalHeight } =
+    useMemo(() => {
+      const tempIsSmall = width < 700;
+      const tempLineWidth = tempIsSmall ? 2 : 4;
+      const tempPlayerSize = tempIsSmall ? 12 : 18;
+      const tempBallSize = tempIsSmall ? 9 : 14;
+      const tempGoalHeight = height / 5;
 
-  // BOARD RENDERING
-  useEffect(() => {
-    if (canvasRef.current)
-      renderBoard(canvasRef.current, {
-        boardSize: { width, height },
-        lineWidth,
-        goalHeight,
-        playerSize,
-        small,
-      });
-  }, [width, height, lineWidth, playerSize, small, goalHeight]);
-
-  // MOVABLES SETUP
-  useEffect(() => {
-    const canvas = movablesRef.current;
-
-    if (canvas) {
-      const dpi = window.devicePixelRatio;
-
-      canvas.width = width * dpi;
-      canvas.height = height * dpi;
-
-      ball.current.position = {
-        x: width / 2,
-        y: height / 2,
+      return {
+        isSmall: tempIsSmall,
+        lineWidth: tempLineWidth,
+        playerSize: tempPlayerSize,
+        ballSize: tempBallSize,
+        goalHeight: tempGoalHeight,
       };
+    }, [width, height]);
 
-      playerPosition.current = {
-        x: width - 100,
-        y: height / 2,
-      };
+  useRenderBoard(canvasRef, {
+    width,
+    height,
+    lineWidth,
+    playerSize,
+    goalHeight,
+    isSmall,
+  });
 
-      const ctx = canvas.getContext('2d');
+  useSetupMovables(movablesRef, ball, playerPosition, { width, height });
 
-      if (ctx) ctx.scale(dpi, dpi);
+  const { setIsRunning, scores } = useGameLoop(
+    movablesRef,
+    ball,
+    playerPosition,
+    {
+      playerSize,
+      ballSize,
+      goalHeight,
     }
-  }, [width, height]);
-
-  useEffect(() => {
-    const dpi = window.devicePixelRatio;
-    const canvas = movablesRef.current;
-
-    if (!canvas || !run) return () => {};
-
-    const interval = setInterval(() => {
-      const newBall = handleBallPosition(
-        ball.current,
-        playerPosition.current,
-        setScores,
-        {
-          ballSize,
-          playerSize,
-          boardSize: {
-            width: canvas.width / dpi,
-            height: canvas.height / dpi,
-          },
-          goalHeight,
-        }
-      );
-      ball.current = newBall;
-
-      const ctx = canvas.getContext('2d');
-
-      if (ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // BALL
-        ctx.fillStyle = '#fff';
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#000';
-        ctx.beginPath();
-        ctx.arc(
-          ball.current.position.x,
-          ball.current.position.y,
-          ballSize,
-          0,
-          Math.PI * 2
-        );
-        ctx.fill();
-        ctx.stroke();
-        ctx.closePath();
-
-        // PLAYER
-        ctx.fillStyle = '#3b82f6';
-        ctx.beginPath();
-        ctx.arc(
-          playerPosition.current.x,
-          playerPosition.current.y,
-          playerSize,
-          0,
-          Math.PI * 2
-        );
-        ctx.fill();
-        ctx.stroke();
-        ctx.closePath();
-      }
-    }, 1000 / 64);
-
-    return () => clearInterval(interval);
-  }, [ballSize, playerSize, goalHeight, run]);
+  );
 
   const handleUserMove = ({ x, y }: { x: number; y: number }) => {
     const node = windowRef.current;
@@ -151,14 +88,14 @@ const Game = () => {
   return (
     <div className="sticky top-0 z-40 flex h-screen w-screen flex-col items-center justify-center gap-4 px-6">
       <p className="text-zinc-400">
-        {/* {isMobile()
+        {isMobile
           ? '(try to move ball with your finger)'
-          : '(try to move ball with your mouse)'} */}
+          : '(try to move ball with your mouse)'}
       </p>
       <motion.div
         className="relative flex h-[75vw] w-full flex-col items-center justify-center sm:h-[55vw] sm:w-3/4 md:h-[50vw] xl:h-[40vw] xl:w-2/3"
-        onViewportEnter={() => setRun(true)}
-        onViewportLeave={() => setRun(false)}
+        onViewportEnter={() => setIsRunning(true)}
+        onViewportLeave={() => setIsRunning(false)}
       >
         <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg ">
           <div className="relative flex h-10 w-full flex-row items-center justify-center bg-zinc-800">
@@ -184,7 +121,10 @@ const Game = () => {
           </div>
 
           <div
-            className="relative flex flex-1 touch-none items-center overflow-hidden rounded-lg bg-[#5A9D61]"
+            className="relative flex flex-1 touch-none items-center overflow-hidden rounded-lg"
+            style={{
+              backgroundColor: STRIPS_COLOR.light,
+            }}
             ref={windowRef}
             onMouseMove={(e) => handleUserMove({ x: e.clientX, y: e.clientY })}
             onTouchMove={(e) =>
@@ -196,7 +136,7 @@ const Game = () => {
           >
             <canvas
               ref={movablesRef}
-              className="absolute top-0 left-0 z-10"
+              className="absolute left-0 top-0 z-10"
               style={{ width, height }}
               onMouseEnter={setMouseVariant.game}
               onMouseLeave={setMouseVariant.default}
@@ -204,7 +144,7 @@ const Game = () => {
 
             <canvas
               ref={canvasRef}
-              className="absolute top-0 left-0"
+              className="absolute left-0 top-0"
               style={{ width, height }}
             />
           </div>
@@ -212,6 +152,4 @@ const Game = () => {
       </motion.div>
     </div>
   );
-};
-
-export default Game;
+}

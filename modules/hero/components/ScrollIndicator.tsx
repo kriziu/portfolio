@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 import { itemVariant } from '../animations/scrollAnimation';
 
-const ScrollIndicator = () => {
+export default function ScrollIndicator() {
   return (
     <motion.div
       className="flex w-full flex-1 flex-col items-center justify-around"
@@ -47,6 +47,4 @@ const ScrollIndicator = () => {
       />
     </motion.div>
   );
-};
-
-export default ScrollIndicator;
+}

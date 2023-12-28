@@ -2,26 +2,26 @@ import { useRef, ReactNode } from 'react';
 
 import { motion } from 'framer-motion';
 
-import { useScrollY } from '@/common/hooks/useScrollY';
-
+import { useScrollY } from '../hooks/useScrollY';
 import { useWindowSize } from '../hooks/useWindowSize';
 
-const ScrollOpacity = ({
-  children,
-  center = false,
-  setStartScroll,
-}: {
+interface ScrollOpacityProps {
   children: ReactNode;
   center?: boolean;
   setStartScroll?: (startScroll: number) => void;
-}) => {
+}
+
+export default function ScrollOpacity({
+  children,
+  center = false,
+  setStartScroll,
+}: ScrollOpacityProps) {
   const { height, width } = useWindowSize();
   const scrollY = useScrollY();
 
   const startScroll = useRef(0);
 
   const mobile = width < 768;
-
   let opacity = 0;
 
   if (startScroll.current) {
@@ -48,6 +48,4 @@ const ScrollOpacity = ({
       {children}
     </motion.div>
   );
-};
-
-export default ScrollOpacity;
+}

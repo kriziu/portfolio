@@ -7,7 +7,7 @@ import { useScrollY } from '@/common/hooks/useScrollY';
 import { useWindowSize } from '@/common/hooks/useWindowSize';
 import { useMouseVariant } from '@/modules/customMouse';
 
-const Header = () => {
+export default function Header() {
   const scrollY = useScrollY();
   const { setMouseVariant } = useMouseVariant();
 
@@ -24,7 +24,7 @@ const Header = () => {
   }
 
   return (
-    <div className="absolute h-[200vh] md:h-[230vh]">
+    <div className="absolute mt-24 h-[200vh] md:h-[230vh]">
       <div className="sticky top-0 z-10 flex h-screen w-screen flex-col items-center justify-center overflow-x-hidden px-10">
         <ScrollOpacity center setStartScroll={setStartScroll}>
           <motion.p
@@ -39,6 +39,4 @@ const Header = () => {
       </div>
     </div>
   );
-};
-
-export default Header;
+}

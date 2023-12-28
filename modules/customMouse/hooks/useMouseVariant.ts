@@ -1,10 +1,11 @@
-import { useContext } from 'react';
-
-import { mouseContext } from '../context/mouseContext';
-import { MouseVariant } from '../types/mouse.type';
+import { useMouseStore } from '../store/mouseStore';
+import { MouseVariant } from '../types/mouse.types';
 
 export const useMouseVariant = () => {
-  const { variant, setVariant, text, setText } = useContext(mouseContext);
+  const { setVariant, setText } = useMouseStore((store) => ({
+    setVariant: store.setVariant,
+    setText: store.setText,
+  }));
 
   const setMouseVariant = {
     default: () => setVariant(MouseVariant.DEFAULT),
@@ -17,5 +18,5 @@ export const useMouseVariant = () => {
     game: () => setVariant(MouseVariant.GAME),
   };
 
-  return { mouseVariant: variant, setMouseVariant, text };
+  return { setMouseVariant };
 };

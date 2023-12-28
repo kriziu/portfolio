@@ -1,7 +1,7 @@
 import ScrollOpacity from '@/common/components/ScrollOpacity';
 import { useMouseVariant } from '@/modules/customMouse';
 
-const Header = () => {
+export default function Header() {
   const { setMouseVariant } = useMouseVariant();
 
   return (
@@ -17,6 +17,4 @@ const Header = () => {
       </ScrollOpacity>
     </div>
   );
-};
-
-export default Header;
+}

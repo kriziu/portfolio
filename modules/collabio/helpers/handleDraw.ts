@@ -1,5 +1,7 @@
 import { drawPath } from './drawPath';
 
+const MAX_PATH_LENGTH = 250;
+
 let path: { x: number; y: number }[] = [];
 let tempImageData: ImageData | undefined;
 
@@ -29,6 +31,10 @@ const handleDraw = (
 
       drawCtx(ctx);
       drawCtx(secondCtx);
+
+      if (path.length > MAX_PATH_LENGTH) {
+        path = path.slice(1);
+      }
     }
   }
 };
@@ -50,10 +56,4 @@ const handleDrawStart = (canvas: HTMLCanvasElement | null) => {
   }
 };
 
-export class Draw {
-  static handleDraw = handleDraw;
-
-  static handleDrawEnd = handleDrawEnd;
-
-  static handleDrawStart = handleDrawStart;
-}
+export { handleDraw, handleDrawEnd, handleDrawStart };
